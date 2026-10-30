@@ -3,158 +3,134 @@
 import Image from "next/image";
 import Link from "next/link";
 import React, { useState } from "react";
+import { Plus, Menu, X } from "lucide-react";
 
 const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
+  const navLinks = [
+    { name: "Home", href: "/", active: true },
+    { name: "Upcoming Events", href: "/events", active: false },
+    { name: "About", href: "/about", active: false },
+    { name: "Contact", href: "/contact", active: false },
+  ];
+
   return (
-    <nav className="bg-[#052e20] w-full">
+    <nav className="sticky top-0 z-50 w-full bg-[#052e20] border-b border-emerald-900/60">
       <div className="max-w-7xl mx-auto px-4 md:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
-          <div className="flex items-center gap-2 shrink-0">
-            <div className="p-1 rounded-md">
-              <Image
-                src="/logo.png"
-                alt="HopeNest Logo"
-                width={200}
-                height={100}
-                className="w-32 h-auto"
-                loading="eager"
-              />
-            </div>
-          </div>
+          {/* Brand Logo */}
+          <Link href="/" className="flex items-center shrink-0">
+            <Image
+              src="/logo.png"
+              alt="HopeNest Logo"
+              width={200}
+              height={100}
+              className="w-32 h-auto"
+              priority
+            />
+          </Link>
 
-          <div className="hidden md:flex items-center space-x-8">
-            <a
-              href="#"
-              className="text-white border-b-2 border-emerald-400 pb-1 text-sm font-medium"
-            >
-              Home
-            </a>
-            <Link
-              href="/"
-              className="text-gray-300 hover:text-white transition pb-1 text-sm font-medium"
-            >
-              Upcoming Events
-            </Link>
-            <Link
-              href="/"
-              className="text-gray-300 hover:text-white transition pb-1 text-sm font-medium"
-            >
-              About
-            </Link>
-            <Link
-              href="/"
-              className="text-gray-300 hover:text-white transition pb-1 text-sm font-medium"
-            >
-              Contact
-            </Link>
-          </div>
-
-          <div className="hidden md:flex items-center space-x-4">
-            <button className="flex items-center gap-1 bg-emerald-500 hover:bg-emerald-600 text-white px-4 py-2 rounded-md text-sm font-medium transition shadow-sm">
-              <svg
-                className="w-4 h-4"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
+          {/* Desktop Navigation */}
+          <div className="hidden md:flex items-center gap-8">
+            {navLinks.map((link) => (
+              <Link
+                key={link.name}
+                href={link.href}
+                className={`relative py-1 text-sm font-medium transition-colors duration-200 ${
+                  link.active
+                    ? "text-white"
+                    : "text-slate-300 hover:text-emerald-400"
+                }`}
               >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M12 4v16m8-8H4"
-                />
-              </svg>
+                {link.name}
+
+                {link.active && (
+                  <span className="absolute -bottom-1 left-0 w-full h-0.5 bg-emerald-400 rounded-full" />
+                )}
+              </Link>
+            ))}
+          </div>
+
+          {/* Desktop Actions */}
+          <div className="hidden md:flex items-center gap-4">
+            {/* Create Event */}
+            <button className="flex items-center gap-2 bg-emerald-500 hover:bg-emerald-400 text-white px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-200 shadow-sm shadow-emerald-500/10">
+              <Plus size={17} strokeWidth={2.5} />
               Create Event
             </button>
 
-            <div className="w-px h-6 bg-gray-600 mx-2"></div>
+            <div className="w-px h-6 bg-emerald-800 mx-1" />
 
-            <button className="text-gray-300 hover:text-white transition text-sm font-medium">
+            {/* Sign In */}
+            <button className="text-slate-300 hover:text-white text-sm font-medium transition-colors">
               Sign In
             </button>
-            <button className="bg-white/10 hover:bg-white/20 border border-white/20 text-white px-4 py-2 rounded-md text-sm font-medium transition backdrop-blur-sm">
+
+            {/* Sign Up */}
+            <button className="bg-white/10 hover:bg-white/15 border border-white/20 text-white px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-200">
               Sign Up
             </button>
           </div>
 
-          {/* Mobile menu button (Hidden md and up) */}
-          <div className="flex md:hidden">
-            <button
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="text-gray-300 hover:text-white p-2"
-            >
-              <svg
-                className="w-6 h-6"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                {isMobileMenuOpen ? (
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M6 18L18 6M6 6l12 12"
-                  />
-                ) : (
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M4 6h16M4 12h16M4 18h16"
-                  />
-                )}
-              </svg>
-            </button>
-          </div>
+          {/* Mobile Menu Button */}
+          <button
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            className="md:hidden flex items-center justify-center p-2 rounded-lg text-slate-300 hover:text-white hover:bg-white/10 transition-colors"
+            aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
+            aria-expanded={isMobileMenuOpen}
+          >
+            {isMobileMenuOpen ? <X size={25} /> : <Menu size={25} />}
+          </button>
         </div>
       </div>
 
-      {/* Mobile Menu Dropdown */}
+      {/* Mobile Menu */}
       {isMobileMenuOpen && (
-        <div className="md:hidden bg-[#042419] border-t border-gray-700 pb-4">
-          <div className="px-4 pt-2 pb-3 space-y-1">
-            <a
-              href="#"
-              className="block px-3 py-2 text-emerald-400 font-medium"
-            >
-              Home
-            </a>
-            <a href="#" className="block px-3 py-2 text-gray-300 font-medium">
-              Upcoming Events
-            </a>
-            <a href="#" className="block px-3 py-2 text-gray-300 font-medium">
-              About
-            </a>
-            <a href="#" className="block px-3 py-2 text-gray-300 font-medium">
-              Contact
-            </a>
-          </div>
-          <div className="px-4 pt-4 border-t border-gray-700 flex flex-col gap-3">
-            <button className="flex justify-center items-center gap-1 bg-emerald-500 text-white px-4 py-2 rounded-md font-medium w-full">
-              <svg
-                className="w-4 h-4"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
+        <div className="md:hidden bg-[#042419] border-t border-emerald-900/60">
+          <div className="max-w-7xl mx-auto px-4 py-4">
+            {/* Mobile Navigation Links */}
+            <div className="flex flex-col gap-1">
+              {navLinks.map((link) => (
+                <Link
+                  key={link.name}
+                  href={link.href}
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className={`px-4 py-3 rounded-lg text-sm font-medium transition-colors ${
+                    link.active
+                      ? "bg-emerald-500/10 text-emerald-400"
+                      : "text-slate-300 hover:bg-white/5 hover:text-white"
+                  }`}
+                >
+                  {link.name}
+                </Link>
+              ))}
+            </div>
+
+            {/* Mobile Actions */}
+            <div className="flex flex-col gap-3 mt-4 pt-4 border-t border-emerald-900/60">
+              <button
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="flex items-center justify-center gap-2 bg-emerald-500 hover:bg-emerald-400 text-white px-4 py-3 rounded-lg text-sm font-semibold transition-colors"
               >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M12 4v16m8-8H4"
-                />
-              </svg>
-              Create Event
-            </button>
-            <button className="text-gray-300 font-medium w-full py-2 text-center">
-              Sign In
-            </button>
-            <button className="bg-white/10 border border-white/20 text-white px-4 py-2 rounded-md font-medium w-full">
-              Sign Up
-            </button>
+                <Plus size={18} />
+                Create Event
+              </button>
+
+              <button
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="w-full text-center text-slate-300 hover:text-white py-2 text-sm font-medium transition-colors"
+              >
+                Sign In
+              </button>
+
+              <button
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="w-full bg-white/10 hover:bg-white/15 border border-white/20 text-white px-4 py-3 rounded-lg text-sm font-semibold transition-colors"
+              >
+                Sign Up
+              </button>
+            </div>
           </div>
         </div>
       )}
