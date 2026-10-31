@@ -3,19 +3,24 @@
 import Image from "next/image";
 import Link from "next/link";
 import React, { useState } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 import { Plus, Menu, X } from "lucide-react";
+
+const navLinks = [
+  { name: "Home", href: "/" },
+  { name: "Upcoming Events", href: "/events" },
+  { name: "About", href: "/about" },
+  { name: "Contact", href: "/contact" },
+];
 
 const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const router = useRouter();
+  const pathname = usePathname();
 
-  const navLinks = [
-    { name: "Home", href: "/", active: true },
-    { name: "Upcoming Events", href: "/events", active: false },
-    { name: "About", href: "/about", active: false },
-    { name: "Contact", href: "/contact", active: false },
-  ];
+  // Home matches only "/", other links also match their sub-routes
+  const isActive = (href: string) =>
+    href === "/" ? pathname === "/" : pathname.startsWith(href);
 
   return (
     <nav className="sticky top-0 z-50 w-full bg-[#052e20] border-b border-emerald-900/60">
@@ -40,14 +45,14 @@ const Navbar = () => {
                 key={link.name}
                 href={link.href}
                 className={`relative py-1 text-sm font-medium transition-colors duration-200 ${
-                  link.active
+                  isActive(link.href)
                     ? "text-white"
                     : "text-slate-300 hover:text-emerald-400"
                 }`}
               >
                 {link.name}
 
-                {link.active && (
+                {isActive(link.href) && (
                   <span className="absolute -bottom-1 left-0 w-full h-0.5 bg-emerald-400 rounded-full" />
                 )}
               </Link>
@@ -100,7 +105,7 @@ const Navbar = () => {
                   href={link.href}
                   onClick={() => setIsMobileMenuOpen(false)}
                   className={`px-4 py-3 rounded-lg text-sm font-medium transition-colors ${
-                    link.active
+                    isActive(link.href)
                       ? "bg-emerald-500/10 text-emerald-400"
                       : "text-slate-300 hover:bg-white/5 hover:text-white"
                   }`}
