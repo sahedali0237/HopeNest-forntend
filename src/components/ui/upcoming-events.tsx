@@ -9,8 +9,10 @@ import {
   ChevronLeft,
   ChevronRight,
   MapPin,
+  Users,
 } from "lucide-react";
 import { useCarousel } from "@/components/ui/carousel";
+import { toast } from "react-toastify";
 
 import {
   Carousel,
@@ -53,6 +55,44 @@ const formatDate = (date: string) => {
   return `${day} · ${time}`;
 };
 
+/* The events API has no attendee data yet, so derive a stable
+   pseudo count from the event id — replace once "going" exists. */
+const goingCount = (id: string) => {
+  let hash = 0;
+  for (let i = 0; i < id.length; i += 1) {
+    hash = (hash * 31 + id.charCodeAt(i)) % 997;
+  }
+  return 12 + (hash % 38);
+};
+
+/* Two rotated avatar initials next to the "N going" line */
+const AVATAR_COLORS = ["bg-emerald-200", "bg-orange-200", "bg-sky-200"];
+
+const AvatarStack = ({ id }: { id: string }) => {
+  const count = goingCount(id);
+  const initials = [
+    String.fromCharCode(65 + (count % 26)),
+    String.fromCharCode(65 + ((count * 7 + 3) % 26)),
+  ];
+
+  return (
+    <p className="mt-3 flex items-center gap-2 text-sm text-stone-600">
+      <span className="flex -space-x-2">
+        {initials.map((initial, index) => (
+          <span
+            key={index}
+            className={`flex size-6 items-center justify-center rounded-full text-[10px] font-bold text-stone-700 ring-2 ring-white ${AVATAR_COLORS[(count + index) % AVATAR_COLORS.length]}`}
+          >
+            {initial}
+          </span>
+        ))}
+      </span>
+      <Users size={15} className="shrink-0 text-emerald-700" />
+      {count} going
+    </p>
+  );
+};
+
 type Props = {
   /** Upcoming events fetched on the server (date >= today). */
   events: EventData[];
@@ -60,7 +100,8 @@ type Props = {
 
 /* Circular edge arrows overlaid on the carousel */
 const CarouselNav = () => {
-  const { scrollPrev, scrollNext, canScrollPrev, canScrollNext } = useCarousel();
+  const { scrollPrev, scrollNext, canScrollPrev, canScrollNext } =
+    useCarousel();
 
   const base =
     "absolute top-1/2 z-10 flex size-9 -translate-y-1/2 items-center justify-center rounded-full border border-stone-200 bg-white text-stone-700 shadow-md transition hover:border-emerald-700 hover:text-emerald-800";
@@ -90,7 +131,9 @@ const CarouselNav = () => {
 export default function UpcomingEvents({ events }: Props) {
   /* Lazy singleton so the plugin instance is stable and can be
      safely passed as a prop and paused/resumed from handlers */
-  const [autoplay] = useState(() => Autoplay({ delay: 3500, stopOnInteraction: true }));
+  const [autoplay] = useState(() =>
+    Autoplay({ delay: 3500, stopOnInteraction: true }),
+  );
 
   /* Pause while hovering, resume on leave */
   const pause = useCallback(() => autoplay.stop(), [autoplay]);
@@ -149,18 +192,13 @@ export default function UpcomingEvents({ events }: Props) {
                     {/* Thumbnail + Type Badge */}
                     <div className="relative h-44 w-full bg-stone-100">
                       {event.thumbnailUrl ? (
-                        <Link
-                          href={`/events/${event._id}`}
-                          aria-label={event.title}
-                          className="group/img block h-full w-full"
-                        >
-                          <img
-                            src={event.thumbnailUrl}
-                            alt={event.title}
-                            loading="lazy"
-                            className="h-full w-full object-cover transition duration-300 group-hover/img:scale-105"
-                          />
-                        </Link>
+                        // eslint-disable-next-line @next/next/no-img-element
+                        <img
+                          src={event.thumbnailUrl}
+                          alt={event.title}
+                          loading="lazy"
+                          className="h-full w-full object-cover"
+                        />
                       ) : (
                         <div className="flex h-full items-center justify-center text-sm text-stone-400">
                           No image available
@@ -181,11 +219,14 @@ export default function UpcomingEvents({ events }: Props) {
                       </h3>
 
                       <p className="mt-2.5 flex items-center gap-2 text-sm text-stone-600">
-                        <MapPin size={15} className="shrink-0 text-emerald-700" />
+                        <MapPin
+                          size={15}
+                          className="shrink-0 text-emerald-700"
+                        />
                         {event.location || "Location to be announced"}
                       </p>
 
-                      <p className="mt-1.5 flex items-center gap-2 text-sm break-words text-stone-600">
+                      <p className="mt-1.5 flex items-center gap-2 text-sm break-broken-words text-stone-600">
                         <CalendarDays
                           size={15}
                           className="shrink-0 text-emerald-700"
@@ -193,12 +234,18 @@ export default function UpcomingEvents({ events }: Props) {
                         {formatDate(event.eventDate)}
                       </p>
 
-                      <Link
-                        href={`/events/${event._id}`}
+                      <AvatarStack id={event._id} />
+
+                      <button
+                        onClick={() =>
+                          toast.info(
+                            `"${event.title}" — event details page coming soon!`,
+                          )
+                        }
                         className="mt-5 block w-full rounded-md bg-emerald-700 py-2.5 text-center text-sm font-semibold text-white transition hover:bg-emerald-800"
                       >
                         View Event
-                      </Link>
+                      </button>
                     </div>
                   </article>
                 </CarouselItem>
