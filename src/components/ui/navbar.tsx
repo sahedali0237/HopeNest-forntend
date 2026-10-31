@@ -3,10 +3,12 @@
 import Image from "next/image";
 import Link from "next/link";
 import React, { useState } from "react";
+import { useRouter } from "next/navigation";
 import { Plus, Menu, X } from "lucide-react";
 
 const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const router = useRouter();
 
   const navLinks = [
     { name: "Home", href: "/", active: true },
@@ -52,10 +54,11 @@ const Navbar = () => {
             ))}
           </div>
 
-          {/* Desktop Actions */}
           <div className="hidden md:flex items-center gap-4">
-            {/* Create Event */}
-            <button className="flex items-center gap-2 bg-emerald-500 hover:bg-emerald-400 text-white px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-200 shadow-sm shadow-emerald-500/10">
+            <button
+              onClick={() => router.push("/create-events")}
+              className="flex items-center gap-2 bg-emerald-500 hover:bg-emerald-400 text-white px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-200 shadow-sm shadow-emerald-500/10"
+            >
               <Plus size={17} strokeWidth={2.5} />
               Create Event
             </button>
@@ -110,7 +113,10 @@ const Navbar = () => {
             {/* Mobile Actions */}
             <div className="flex flex-col gap-3 mt-4 pt-4 border-t border-emerald-900/60">
               <button
-                onClick={() => setIsMobileMenuOpen(false)}
+                onClick={() => {
+                  setIsMobileMenuOpen(false);
+                  router.push("/create-events");
+                }}
                 className="flex items-center justify-center gap-2 bg-emerald-500 hover:bg-emerald-400 text-white px-4 py-3 rounded-lg text-sm font-semibold transition-colors"
               >
                 <Plus size={18} />

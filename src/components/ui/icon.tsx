@@ -1,20 +1,20 @@
-import * as React from "react"
-import { Slot } from "@radix-ui/react-slot"
+import * as React from "react";
+import { Slot } from "@radix-ui/react-slot";
 
-import { cn } from "@/lib/utils"
+import { cn } from "@/lib/utils";
 
 interface IconProps extends React.SVGAttributes<SVGSVGElement> {
-  size?: number | string
-  asChild?: boolean
+  size?: number | string;
+  asChild?: boolean;
 }
 
 const Icon = React.forwardRef<SVGSVGElement, IconProps>(
   ({ size, className, asChild, ...props }, ref) => {
-    const Comp = asChild ? Slot : "svg"
+    const Comp: React.ElementType = asChild ? Slot : "svg";
 
     return (
       <Comp
-        ref={ref as React.Ref<any>}
+        ref={ref}
         width={size}
         height={size}
         fill="none"
@@ -25,9 +25,9 @@ const Icon = React.forwardRef<SVGSVGElement, IconProps>(
         className={cn(className)}
         {...props}
       />
-    )
-  }
-)
-Icon.displayName = "Icon"
+    );
+  },
+);
+Icon.displayName = "Icon";
 
-export { Icon }
+export { Icon };

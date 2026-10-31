@@ -13,6 +13,7 @@ import {
   FileText,
   Cookie,
 } from "lucide-react";
+import Image from "next/image";
 
 const Footer = () => {
   const currentYear = new Date().toLocaleDateString();
@@ -50,17 +51,15 @@ const Footer = () => {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-12 mb-14">
           {/* Brand */}
           <div>
-            <Link
-              href="/"
-              className="inline-flex items-center gap-3 mb-5 group"
-            >
-              <div className="flex items-center justify-center w-10 h-10 rounded-xl bg-emerald-500 text-white shadow-lg shadow-emerald-500/20 group-hover:bg-emerald-400 transition-colors">
-                <Users size={23} strokeWidth={2.2} />
-              </div>
-
-              <span className="text-2xl font-bold tracking-tight text-white">
-                Hope<span className="text-emerald-400">Nest</span>
-              </span>
+            <Link href="/" className="flex items-center shrink-0 gap-3 mb-5">
+              <Image
+                src="/logo.png"
+                alt="HopeNest Logo"
+                width={250}
+                height={200}
+                className="w-32 h-auto"
+                priority
+              />
             </Link>
 
             <p className="text-[14px] leading-7 text-slate-300 max-w-xs">
