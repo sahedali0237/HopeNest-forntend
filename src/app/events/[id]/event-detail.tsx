@@ -18,6 +18,7 @@ import {
   getTimeRange,
   type EventDetailData,
 } from "./detail-data";
+import Image from "next/image";
 
 /* Soft pill colors per event type (matches the badge hues on the cards) */
 const TYPE_PILLS: Record<string, string> = {
@@ -35,7 +36,6 @@ const AVATAR_FALLBACKS = [
 
 type Props = {
   detail: EventDetailData;
-  /** "3 days left" style countdown, computed on the server. */
   daysLeft: string;
 };
 
@@ -86,7 +86,7 @@ export default function EventDetail({ detail, daysLeft }: Props) {
           <div className="h-full w-full bg-emerald-900" />
         )}
 
-        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent" />
+        <div className="absolute inset-0 bg-linear-to-t from-black/60 via-black/10 to-transparent" />
 
         <div className="absolute inset-x-0 bottom-0 pb-5">
           <div className="mx-auto max-w-7xl px-4 md:px-6 lg:px-8">
@@ -144,7 +144,9 @@ export default function EventDetail({ detail, daysLeft }: Props) {
                 >
                   <Bookmark
                     size={18}
-                    className={isSaved ? "fill-emerald-700 text-emerald-700" : ""}
+                    className={
+                      isSaved ? "fill-emerald-700 text-emerald-700" : ""
+                    }
                   />
                 </button>
               </div>
@@ -192,7 +194,8 @@ export default function EventDetail({ detail, daysLeft }: Props) {
                 About This Event
               </h2>
               <p className="mt-3 max-w-2xl text-sm leading-relaxed text-stone-600 sm:text-base">
-                {detail.description || "More details about this event coming soon."}
+                {detail.description ||
+                  "More details about this event coming soon."}
               </p>
             </section>
 
@@ -226,7 +229,7 @@ export default function EventDetail({ detail, daysLeft }: Props) {
               <div className="mt-4 flex flex-wrap items-center justify-between gap-4">
                 <div className="flex items-center gap-3">
                   {detail.organizer.photoUrl ? (
-                    <img
+                    <Image
                       src={detail.organizer.photoUrl}
                       alt={detail.organizer.name}
                       className="h-12 w-12 shrink-0 rounded-full object-cover"
@@ -328,14 +331,16 @@ export default function EventDetail({ detail, daysLeft }: Props) {
                 <div className="mt-2.5 flex items-center">
                   <div className="flex -space-x-2">
                     {detail.attendeeAvatars.length > 0
-                      ? detail.attendeeAvatars.slice(0, 3).map((avatar, i) => (
-                          <img
-                            key={avatar}
-                            src={avatar}
-                            alt="Attendee"
-                            className="h-7 w-7 rounded-full object-cover ring-2 ring-white"
-                          />
-                        ))
+                      ? detail.attendeeAvatars
+                          .slice(0, 3)
+                          .map((avatar) => (
+                            <Image
+                              key={avatar}
+                              src={avatar}
+                              alt="Attendee"
+                              className="h-7 w-7 rounded-full object-cover ring-2 ring-white"
+                            />
+                          ))
                       : AVATAR_FALLBACKS.slice(0, 3).map((style, i) => (
                           <span
                             key={i}
