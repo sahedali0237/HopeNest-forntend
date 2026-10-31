@@ -1,4 +1,5 @@
 import Hero from "@/components/ui/hero";
+import InfoSection from "@/components/ui/info-section";
 import { API_URL, normalizeEvent, type EventData } from "./events/events-data";
 
 export default async function Home() {
@@ -25,5 +26,10 @@ export default async function Home() {
     /* Hero falls back to "All Locations" when the API is unreachable */
   }
 
-  return <Hero locations={locations} />;
+  return (
+    <>
+      <Hero locations={locations} />
+      <InfoSection />
+    </>
+  );
 }
