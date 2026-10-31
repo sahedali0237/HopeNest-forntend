@@ -5,6 +5,8 @@ import Link from "next/link";
 import React, { useState } from "react";
 import { useRouter, usePathname } from "next/navigation";
 import { Plus, Menu, X } from "lucide-react";
+import SignInPage from "@/app/signIn/page";
+import SignUpPage from "./../../app/signUp/page";
 
 const navLinks = [
   { name: "Home", href: "/" },
@@ -71,12 +73,18 @@ const Navbar = () => {
             <div className="w-px h-6 bg-emerald-800 mx-1" />
 
             {/* Sign In */}
-            <button className="text-slate-300 hover:text-white text-sm font-medium transition-colors">
+            <button
+              onClick={() => router.push("/signIn")}
+              className="text-slate-300 hover:text-white text-sm font-medium transition-colors"
+            >
               Sign In
             </button>
 
             {/* Sign Up */}
-            <button className="bg-white/10 hover:bg-white/15 border border-white/20 text-white px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-200">
+            <button
+              onClick={() => router.push("/signUp")}
+              className="bg-white/10 hover:bg-white/15 border border-white/20 text-white px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-200"
+            >
               Sign Up
             </button>
           </div>
@@ -128,19 +136,8 @@ const Navbar = () => {
                 Create Event
               </button>
 
-              <button
-                onClick={() => setIsMobileMenuOpen(false)}
-                className="w-full text-center text-slate-300 hover:text-white py-2 text-sm font-medium transition-colors"
-              >
-                Sign In
-              </button>
-
-              <button
-                onClick={() => setIsMobileMenuOpen(false)}
-                className="w-full bg-white/10 hover:bg-white/15 border border-white/20 text-white px-4 py-3 rounded-lg text-sm font-semibold transition-colors"
-              >
-                Sign Up
-              </button>
+              <SignInPage />
+              <SignUpPage />
             </div>
           </div>
         </div>
