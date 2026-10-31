@@ -73,7 +73,7 @@ export default function About() {
                 fill
                 className="object-cover opacity-60 group-hover:opacity-80 transition-opacity duration-500 grayscale group-hover:grayscale-0"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-yellow-50 via-yellow-50/80 to-transparent" />
+              <div className="absolute inset-0 bg-linear-to-t from-yellow-50 via-yellow-50/80 to-transparent" />
             </div>
             <div className="absolute bottom-0 left-0 right-0 p-8">
               <div className="size-12 flex items-center justify-center rounded-2xl bg-yellow-100 border border-yellow-200 mb-4 group-hover:scale-110 transition-transform duration-300">
@@ -98,7 +98,7 @@ export default function About() {
                 fill
                 className="object-cover opacity-60 group-hover:opacity-80 transition-opacity duration-500 grayscale group-hover:grayscale-0"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-yellow-50 via-yellow-50/80 to-transparent" />
+              <div className="absolute inset-0 bg-linear-to-t from-yellow-50 via-yellow-50/80 to-transparent" />
             </div>
             <div className="absolute bottom-0 left-0 right-0 p-8">
               <div className="size-12 flex items-center justify-center rounded-2xl bg-yellow-100 border border-yellow-200 mb-4 group-hover:scale-110 transition-transform duration-300">
@@ -161,14 +161,14 @@ export default function About() {
         </div>
 
         {/* Get Involved CTA */}
-        <div className="relative mt-24 rounded-3xl overflow-hidden min-h-[400px] flex items-center border border-yellow-200 shadow-lg group">
+        <div className="relative mt-24 rounded-3xl overflow-hidden min-h-100 flex items-center border border-yellow-200 shadow-lg group">
           <Image
             src="https://images.unsplash.com/photo-1578665475429-4e971e8332c4?auto=format&fit=crop&w=1600&q=80"
             alt="Community event with people gathered"
             fill
             className="object-cover opacity-70 group-hover:scale-105 transition-transform duration-700 ease-in-out"
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-yellow-900/90 via-yellow-900/70 to-transparent" />
+          <div className="absolute inset-0 bg-linear-to-r from-yellow-900/90 via-yellow-900/70 to-transparent" />
 
           <div className="relative w-full max-w-3xl px-8 md:px-16 py-16 md:py-24 z-10">
             <h2 className="text-4xl md:text-6xl font-bold text-white mb-6 tracking-tight">
