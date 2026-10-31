@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useMemo, useState } from "react";
 import {
   AlertCircle,
@@ -10,7 +11,6 @@ import {
   RefreshCcw,
   Search,
 } from "lucide-react";
-import { toast } from "react-toastify";
 import { API_URL, normalizeEvent, type EventData } from "./events-data";
 
 const EVENTS_PER_PAGE = 6;
@@ -234,10 +234,6 @@ export default function EventsClient({
     setCurrentPage(1);
   };
 
-  const handleViewEvent = (event: EventData) => {
-    toast.info(`"${event.title}" — event details page coming soon!`);
-  };
-
   // Runs only from user clicks — a client-side fallback in case the
   // server-side fetch at page load failed.
   const refetchEvents = async () => {
@@ -406,13 +402,18 @@ export default function EventsClient({
                   {/* Thumbnail + Type Badge */}
                   <div className="relative h-44 w-full bg-stone-100">
                     {event.thumbnailUrl ? (
-                      // eslint-disable-next-line @next/next/no-img-element
-                      <img
-                        src={event.thumbnailUrl}
-                        alt={event.title}
-                        loading="lazy"
-                        className="h-full w-full object-cover"
-                      />
+                      <Link
+                        href={`/events/${event._id}`}
+                        aria-label={event.title}
+                        className="group/img block h-full w-full"
+                      >
+                        <img
+                          src={event.thumbnailUrl}
+                          alt={event.title}
+                          loading="lazy"
+                          className="h-full w-full object-cover transition duration-300 group-hover/img:scale-105"
+                        />
+                      </Link>
                     ) : (
                       <div className="flex h-full items-center justify-center text-sm text-stone-400">
                         No image available
@@ -445,14 +446,14 @@ export default function EventsClient({
                       {formatDate(event.eventDate)}
                     </p>
 
-                    <button
-                      onClick={() => handleViewEvent(event)}
-                      className="mt-auto pt-5"
+                    <Link
+                      href={`/events/${event._id}`}
+                      className="mt-auto block pt-5"
                     >
                       <span className="block w-full rounded-md bg-emerald-700 py-2.5 text-center text-sm font-semibold text-white transition hover:bg-emerald-800">
                         View Event
                       </span>
-                    </button>
+                    </Link>
                   </div>
                 </article>
               );

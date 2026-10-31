@@ -1,5 +1,6 @@
 import Hero from "@/components/ui/hero";
 import InfoSection from "@/components/ui/info-section";
+import CommunityGallery from "@/components/ui/community-gallery";
 import UpcomingEvents from "@/components/ui/upcoming-events";
 import { API_URL, normalizeEvent, type EventData } from "./events/events-data";
 
@@ -52,6 +53,7 @@ export default async function Home() {
       <Hero locations={locations} />
       <UpcomingEvents events={upcoming} />
       <InfoSection />
+      <CommunityGallery />
     </>
   );
 }

@@ -11,7 +11,6 @@ import {
   MapPin,
 } from "lucide-react";
 import { useCarousel } from "@/components/ui/carousel";
-import { toast } from "react-toastify";
 
 import {
   Carousel,
@@ -150,13 +149,18 @@ export default function UpcomingEvents({ events }: Props) {
                     {/* Thumbnail + Type Badge */}
                     <div className="relative h-44 w-full bg-stone-100">
                       {event.thumbnailUrl ? (
-                        // eslint-disable-next-line @next/next/no-img-element
-                        <img
-                          src={event.thumbnailUrl}
-                          alt={event.title}
-                          loading="lazy"
-                          className="h-full w-full object-cover"
-                        />
+                        <Link
+                          href={`/events/${event._id}`}
+                          aria-label={event.title}
+                          className="group/img block h-full w-full"
+                        >
+                          <img
+                            src={event.thumbnailUrl}
+                            alt={event.title}
+                            loading="lazy"
+                            className="h-full w-full object-cover transition duration-300 group-hover/img:scale-105"
+                          />
+                        </Link>
                       ) : (
                         <div className="flex h-full items-center justify-center text-sm text-stone-400">
                           No image available
@@ -189,16 +193,12 @@ export default function UpcomingEvents({ events }: Props) {
                         {formatDate(event.eventDate)}
                       </p>
 
-                      <button
-                        onClick={() =>
-                          toast.info(
-                            `"${event.title}" — event details page coming soon!`,
-                          )
-                        }
+                      <Link
+                        href={`/events/${event._id}`}
                         className="mt-5 block w-full rounded-md bg-emerald-700 py-2.5 text-center text-sm font-semibold text-white transition hover:bg-emerald-800"
                       >
                         View Event
-                      </button>
+                      </Link>
                     </div>
                   </article>
                 </CarouselItem>
