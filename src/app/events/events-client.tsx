@@ -62,9 +62,18 @@ type Props = {
   initialEvents: EventData[];
   /** True when the server-side fetch to the events API failed. */
   fetchFailed: boolean;
+  /** Optional filter chip pre-selected via URL (?filter=...), e.g. from the hero. */
+  initialFilter?: string;
+  /** Optional search text pre-filled via URL (?search=...), e.g. from the hero. */
+  initialSearch?: string;
 };
 
-export default function EventsClient({ initialEvents, fetchFailed }: Props) {
+export default function EventsClient({
+  initialEvents,
+  fetchFailed,
+  initialFilter,
+  initialSearch,
+}: Props) {
   const [refetched, setRefetched] = useState<EventData[] | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [loadError, setLoadError] = useState<string | null>(
@@ -73,8 +82,13 @@ export default function EventsClient({ initialEvents, fetchFailed }: Props) {
       : null,
   );
 
-  const [activeFilter, setActiveFilter] = useState("All");
-  const [searchQuery, setSearchQuery] = useState("");
+  const validFilters = ["All", "Cleanup", "Donation", "Plantation", "Other"];
+  const [activeFilter, setActiveFilter] = useState(
+    initialFilter && validFilters.includes(initialFilter)
+      ? initialFilter
+      : "All",
+  );
+  const [searchQuery, setSearchQuery] = useState(initialSearch ?? "");
   const [sortBy, setSortBy] = useState("latest");
   const [currentPage, setCurrentPage] = useState(1);
 

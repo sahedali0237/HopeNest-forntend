@@ -1,7 +1,11 @@
 import EventsClient from "./events-client";
 import { API_URL, normalizeEvent, type EventData } from "./events-data";
 
-export default async function EventsPage() {
+export default async function EventsPage({
+  searchParams,
+}: PageProps<"/events">) {
+  const { filter, search } = await searchParams;
+
   let fetchFailed = false;
   let events: EventData[] = [];
 
@@ -23,5 +27,12 @@ export default async function EventsPage() {
     fetchFailed = true;
   }
 
-  return <EventsClient initialEvents={events} fetchFailed={fetchFailed} />;
+  return (
+    <EventsClient
+      initialEvents={events}
+      fetchFailed={fetchFailed}
+      initialFilter={typeof filter === "string" ? filter : undefined}
+      initialSearch={typeof search === "string" ? search : undefined}
+    />
+  );
 }
