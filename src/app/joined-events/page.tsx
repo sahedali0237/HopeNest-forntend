@@ -22,27 +22,25 @@ interface Event {
 export default function JoinedEventsPage() {
   const { user, isLoading: sessionLoading } = useSession();
   const [events, setEvents] = useState<Event[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
   const router = useRouter();
 
-  // Fetch user's joined events
   useEffect(() => {
+    if (sessionLoading) return;
+
+    if (!user) {
+      router.push("/signIn");
+      return;
+    }
+
+    let cancelled = false;
+
     const fetchJoinedEvents = async () => {
-      if (sessionLoading) return;
-
-      if (!user) {
-        router.push("/signIn");
-        return;
-      }
-
-      setIsLoading(true);
       try {
-        // Fetch events the current user has actually joined
         const res = await fetch("/api/events/joined", { cache: "no-store" });
         if (!res.ok) throw new Error("Failed to fetch joined events");
 
         const data = await res.json();
-        if (Array.isArray(data)) {
+        if (Array.isArray(data) && !cancelled) {
           const joinedEvents = data
             .filter((event: Event) => event.isJoined)
             .sort(
@@ -53,15 +51,42 @@ export default function JoinedEventsPage() {
           setEvents(joinedEvents);
         }
       } catch (error) {
-        console.error("Error fetching joined events:", error);
-        toast.error("Failed to load joined events");
-      } finally {
-        setIsLoading(false);
+        if (!cancelled) {
+          console.error("Error fetching joined events:", error);
+          toast.error("Failed to load joined events");
+        }
       }
     };
 
     fetchJoinedEvents();
+
+    return () => {
+      cancelled = true;
+    };
   }, [user, sessionLoading, router]);
+
+  const handleLeaveEvent = async (eventId: string) => {
+    try {
+      const res = await fetch(`/api/events/${eventId}/join`, {
+        method: "DELETE",
+        headers: { "Content-Type": "application/json" },
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        throw new Error(data.message || "Failed to leave event");
+      }
+
+      toast.success(data.message || "Successfully left the event");
+      window.location.reload();
+    } catch (error) {
+      console.error("Error leaving event:", error);
+      toast.error(
+        error instanceof Error ? error.message : "Failed to leave event",
+      );
+    }
+  };
 
   if (sessionLoading) {
     return (
@@ -76,7 +101,7 @@ export default function JoinedEventsPage() {
   }
 
   if (!user) {
-    return null; // Will redirect in useEffect
+    return null;
   }
 
   return (
@@ -109,10 +134,8 @@ export default function JoinedEventsPage() {
                   onViewDetails={() => {
                     toast.info("Viewing event details");
                   }}
-                  onEdit={() =>
-                    toast.info("Edit not available for joined events")
-                  }
-                  onDelete={() => toast.error("Cannot delete joined events")}
+                  onDelete={() => handleLeaveEvent(event._id)}
+                  deleteLabel="Leave Event"
                 />
               ))}
             </div>

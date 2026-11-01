@@ -87,6 +87,8 @@ export default function ProfilePage() {
                 <Image
                   src={profile.image}
                   alt={profile.name}
+                  width={128}
+                  height={128}
                   className="w-full h-full rounded-full object-cover"
                 />
               ) : (
@@ -202,6 +204,8 @@ export default function ProfilePage() {
                     <Image
                       src={profile.image}
                       alt={profile.name}
+                      width={96}
+                      height={96}
                       className="w-full h-full rounded-full object-cover"
                     />
                   ) : (
@@ -245,7 +249,9 @@ export default function ProfilePage() {
                     name: sessionUser.name,
                     email: sessionUser.email,
                     image: sessionUser.image,
-                    bio: "Community volunteer focused on environmental conservation and social development.",
+                    bio:
+                      user.bio ||
+                      "Community volunteer focused on environmental conservation and social development.",
                   });
                   setIsEditing(true);
                 }}

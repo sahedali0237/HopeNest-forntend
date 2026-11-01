@@ -14,6 +14,7 @@ export interface EventCardProps {
   onViewDetails?: () => void;
   onEdit?: () => void;
   onDelete?: () => void;
+  deleteLabel?: string;
 }
 
 export const EventCard = ({
@@ -26,6 +27,7 @@ export const EventCard = ({
   onViewDetails,
   onEdit,
   onDelete,
+  deleteLabel,
 }: EventCardProps) => {
   const formatDate = (date: string) => {
     const parsed = new Date(date);
@@ -107,27 +109,27 @@ export const EventCard = ({
             {onViewDetails && (
               <Link
                 href={`/events/${id}`}
-                className="flex-1 rounded-md bg-emerald-50 px-3 py-1.5 text-sm text-emerald-600 hover:bg-emerald-100 transition-colors"
+                className="flex-1 rounded-lg bg-gradient-to-r from-emerald-500 to-emerald-600 px-4 py-2 text-sm font-medium text-white hover:from-emerald-600 hover:to-emerald-700 transition-all duration-200 shadow-sm hover:shadow-md flex items-center justify-center gap-1.5"
               >
-                <Eye className="w-3 h-3 mr-1" />View Details
+                <Eye className="w-4 h-4" />View Details
               </Link>
             )}
 
             {onEdit && (
               <button
                 onClick={onEdit}
-                className="flex-1 rounded-md bg-white px-3 py-1.5 text-sm text-emerald-600 border border-emerald-300 hover:bg-emerald-50 transition-all"
+                className="flex-1 rounded-lg bg-white px-4 py-2 text-sm font-medium text-emerald-600 border-2 border-emerald-300 hover:bg-emerald-50 hover:border-emerald-400 hover:shadow-sm transition-all duration-200 flex items-center justify-center gap-1.5"
               >
-                <Edit className="w-3 h-3 mr-1" />Edit
+                <Edit className="w-4 h-4" />Edit
               </button>
             )}
 
             {onDelete && (
               <button
                 onClick={onDelete}
-                className="flex-1 rounded-md bg-white/50 px-3 py-1.5 text-sm text-red-600 hover:bg-red-500/80 transition-all"
+                className="flex-1 rounded-lg bg-gradient-to-r from-red-500 to-red-600 px-4 py-2 text-sm font-medium text-white hover:from-red-600 hover:to-red-700 transition-all duration-200 shadow-sm hover:shadow-md flex items-center justify-center gap-1.5"
               >
-                <Trash className="w-3 h-3 mr-1" />Delete
+                <Trash className="w-4 h-4" />{deleteLabel ?? "Delete"}
               </button>
             )}
           </div>

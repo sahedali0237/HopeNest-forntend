@@ -131,3 +131,64 @@ export async function POST(
     );
   }
 }
+
+export async function DELETE(
+  req: Request,
+  { params }: { params: Promise<{ id: string }> }
+) {
+  try {
+    // Verify authentication - user must be logged in to leave an event
+    const user = await verifyAuth(req);
+    if (!user) {
+      return NextResponse.json(
+        { message: "Unauthorized - Please log in to leave events" },
+        { status: 401 },
+      );
+    }
+
+    const { id } = await params;
+    const db = (await clientPromise).db("HopeNest");
+    const joinsCollection = db.collection("eventJoins");
+
+    // Check if user has joined this event
+    const userJoin = await joinsCollection.findOne({
+      eventId: id,
+      userEmail: user.email,
+    });
+
+    if (!userJoin) {
+      return NextResponse.json(
+        { message: "You have not joined this event" },
+        { status: 400 },
+      );
+    }
+
+    // Remove the participation record
+    await joinsCollection.deleteOne({
+      eventId: id,
+      userEmail: user.email,
+    });
+
+    const joinCount = await joinsCollection.countDocuments({ eventId: id });
+
+    return NextResponse.json(
+      {
+        message: "Successfully left the event",
+        eventId: id,
+        joined: false,
+        joinCount,
+      },
+      { status: 200 },
+    );
+  } catch (error: unknown) {
+    console.error("Leave event error:", error);
+
+    return NextResponse.json(
+      {
+        message: "Failed to leave event",
+        error: error instanceof Error ? error.message : String(error),
+      },
+      { status: 500 },
+    );
+  }
+}

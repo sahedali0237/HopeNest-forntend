@@ -224,13 +224,6 @@ export default function EventDetail({ detail, daysLeft }: Props) {
             </div>
 
             <div className="mt-2.5 flex flex-wrap items-center gap-x-6 gap-y-2 text-sm text-stone-600">
-              <span className="flex items-center gap-2">
-                <Users size={16} className="shrink-0 text-emerald-700" />
-                <span className="font-semibold text-[#0b3b2e]">
-                  {!sessionLoading ? joinCount : detail.attendees} going
-                </span>
-              </span>
-
               {daysLeft && (
                 <span className="flex items-center gap-2">
                   <Clock size={16} className="shrink-0 text-emerald-700" />
@@ -377,9 +370,6 @@ export default function EventDetail({ detail, daysLeft }: Props) {
                   <Users size={15} className="text-emerald-700" />
                   Attendees
                 </h3>
-                <p className="mt-3 text-sm font-semibold text-emerald-700">
-                  {detail.attendees} going
-                </p>
 
                 <div className="mt-2.5 flex items-center">
                   <div className="flex -space-x-2">

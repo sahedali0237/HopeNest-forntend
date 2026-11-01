@@ -22,9 +22,7 @@ export default async function Home() {
 
         locations = [
           ...new Set(
-            events
-              .map((event: EventData) => event.location)
-              .filter(Boolean),
+            events.map((event: EventData) => event.location).filter(Boolean),
           ),
         ];
 
@@ -44,9 +42,7 @@ export default async function Home() {
           .slice(0, PREVIEW_LIMIT);
       }
     }
-  } catch {
-    /* Hero falls back to "All Locations" when the API is unreachable */
-  }
+  } catch {}
 
   return (
     <>

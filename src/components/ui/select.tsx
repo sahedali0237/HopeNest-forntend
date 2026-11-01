@@ -173,7 +173,7 @@ export const SelectItem = React.forwardRef(function SelectItem(
       role="option"
       aria-selected="false"
       aria-disabled={disabled}
-      /* @ts-ignore */
+      /* @ts-expect-error - value prop is required by Radix SelectItem but not in HTML div props */
       value={value as string}
       className={cn(
         "relative flex cursor-default select-none items-center rounded-sm py-1.5 pl-8 pr-2 text-sm outline-none focus:bg-emerald-50 focus:text-emerald-900 data-[disabled]:pointer-events-none data-[disabled]:opacity-50",

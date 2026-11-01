@@ -39,7 +39,7 @@ export default function SignInPage() {
         {
           email: data.email,
           password: data.password,
-          callbackURL: "/dashboard",
+          callbackURL: "/",
         },
         {
           onRequest: () => {

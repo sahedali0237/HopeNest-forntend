@@ -38,7 +38,6 @@ export default function SignUpPage() {
 
   const watchPassword = watch("password", "");
 
-  // Password requirements
   const passwordRules = [
     {
       label: "8+ characters",
@@ -54,7 +53,6 @@ export default function SignUpPage() {
     },
   ];
 
-  // Create Account
   const handleCreateAccount = async (formData: SignUpFormData) => {
     setIsLoading(true);
 
@@ -67,7 +65,7 @@ export default function SignUpPage() {
           email: formData.email,
           password: formData.password,
           image: formData.photoUrl,
-          callbackURL: "/dashboard",
+          callbackURL: "/",
         },
         {
           onRequest: () => {

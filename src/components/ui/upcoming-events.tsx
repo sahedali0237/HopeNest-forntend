@@ -20,8 +20,8 @@ import {
   CarouselItem,
 } from "@/components/ui/carousel";
 import type { EventData } from "@/app/events/events-data";
+import Image from "next/image";
 
-/* Same per-type badge colors as the /events page cards */
 const TYPE_STYLES: Record<string, string> = {
   Cleanup: "bg-emerald-600",
   Donation: "bg-orange-500",
@@ -42,9 +42,6 @@ const formatDate = (date: string) => {
     month: "short",
     year: "numeric",
   });
-
-  /* Only show a time when the record actually carries one
-     (a date-only value parses as midnight) */
   if (parsed.getHours() === 0 && parsed.getMinutes() === 0) return day;
 
   const time = parsed.toLocaleTimeString("en-US", {
@@ -55,8 +52,6 @@ const formatDate = (date: string) => {
   return `${day} · ${time}`;
 };
 
-/* The events API has no attendee data yet, so derive a stable
-   pseudo count from the event id — replace once "going" exists. */
 const goingCount = (id: string) => {
   let hash = 0;
   for (let i = 0; i < id.length; i += 1) {
@@ -66,11 +61,9 @@ const goingCount = (id: string) => {
 };
 
 type Props = {
-  /** Upcoming events fetched on the server (date >= today). */
   events: EventData[];
 };
 
-/* Circular edge arrows overlaid on the carousel */
 const CarouselNav = () => {
   const { scrollPrev, scrollNext, canScrollPrev, canScrollNext } =
     useCarousel();
@@ -101,20 +94,16 @@ const CarouselNav = () => {
 };
 
 export default function UpcomingEvents({ events }: Props) {
-  /* Lazy singleton so the plugin instance is stable and can be
-     safely passed as a prop and paused/resumed from handlers */
   const [autoplay] = useState(() =>
     Autoplay({ delay: 3500, stopOnInteraction: true }),
   );
 
-  /* Pause while hovering, resume on leave */
   const pause = useCallback(() => autoplay.stop(), [autoplay]);
   const play = useCallback(() => autoplay.play(), [autoplay]);
 
   return (
     <section className="bg-[#F5F5F0]">
       <div className="mx-auto max-w-7xl px-4 py-14 md:px-6 lg:px-8 lg:py-16">
-        {/* Section header */}
         <div className="mb-8 flex items-end justify-between">
           <div>
             <h2 className="text-2xl font-bold text-[#0b3b2e] sm:text-3xl">
@@ -161,28 +150,30 @@ export default function UpcomingEvents({ events }: Props) {
                   className="basis-full pl-5 sm:basis-1/2 lg:basis-1/3"
                 >
                   <article className="flex h-full flex-col overflow-hidden rounded-xl border border-stone-200 bg-white shadow-sm transition duration-200 hover:-translate-y-1 hover:shadow-md">
-                    {/* Thumbnail + Type Badge */}
-                    <div className="relative h-44 w-full bg-stone-100">
-                      {event.thumbnailUrl ? (
-                        // eslint-disable-next-line @next/next/no-img-element
-                        <img
-                          src={event.thumbnailUrl}
-                          alt={event.title}
-                          loading="lazy"
-                          className="h-full w-full object-cover"
-                        />
-                      ) : (
-                        <div className="flex h-full items-center justify-center text-sm text-stone-400">
-                          No image available
-                        </div>
-                      )}
+                    <Link href={`/events/${event._id}`} className="block">
+                      <div className="relative h-44 w-full bg-stone-100">
+                        {event.thumbnailUrl ? (
+                          <Image
+                            src={event.thumbnailUrl}
+                            alt={event.title}
+                            width={800}
+                            height={533}
+                            loading="lazy"
+                            className="h-full w-full object-cover transition-transform duration-200 hover:scale-105"
+                          />
+                        ) : (
+                          <div className="flex h-full items-center justify-center text-sm text-stone-400">
+                            No image available
+                          </div>
+                        )}
 
-                      <span
-                        className={`absolute left-3 top-3 rounded-full px-3 py-1 text-xs font-semibold text-white shadow-sm ${getBadgeStyle(event.eventType)}`}
-                      >
-                        {event.eventType}
-                      </span>
-                    </div>
+                        <span
+                          className={`absolute left-3 top-3 rounded-full px-3 py-1 text-xs font-semibold text-white shadow-sm ${getBadgeStyle(event.eventType)}`}
+                        >
+                          {event.eventType}
+                        </span>
+                      </div>
+                    </Link>
 
                     {/* Card Body */}
                     <div className="flex flex-1 flex-col p-4 sm:p-5">
@@ -206,16 +197,12 @@ export default function UpcomingEvents({ events }: Props) {
                         {formatDate(event.eventDate)}
                       </p>
 
-                      <button
-                        onClick={() =>
-                          toast.info(
-                            `"${event.title}" — event details page coming soon!`,
-                          )
-                        }
+                      <Link
+                        href={`/events/${event._id}`}
                         className="mt-5 block w-full rounded-md bg-emerald-700 py-2.5 text-center text-sm font-semibold text-white transition hover:bg-emerald-800"
                       >
                         View Event
-                      </button>
+                      </Link>
                     </div>
                   </article>
                 </CarouselItem>
