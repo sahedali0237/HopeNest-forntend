@@ -1,4 +1,4 @@
-const API_URL = "http://localhost:5000/events";
+const API_URL = `${process.env.BACKEND_URL}/events`;
 
 type EventData = {
   _id: string;

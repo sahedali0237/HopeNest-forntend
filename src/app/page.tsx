@@ -12,6 +12,8 @@ export default async function Home() {
   let upcoming: EventData[] = [];
 
   try {
+    if (!API_URL) throw new Error("API_URL is not configured");
+
     const res = await fetch(API_URL, { cache: "no-store" });
 
     if (res.ok) {
