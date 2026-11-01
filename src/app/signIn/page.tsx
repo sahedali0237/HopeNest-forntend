@@ -34,12 +34,16 @@ export default function SignInPage() {
   const onSubmit = async (data: SignInFormData) => {
     setIsLoading(true);
 
+    // Send the user back to the page they were trying to reach after login.
+    const callbackUrl =
+      new URLSearchParams(window.location.search).get("callbackUrl") || "/";
+
     try {
       await authClient.signIn.email(
         {
           email: data.email,
           password: data.password,
-          callbackURL: "/",
+          callbackURL: callbackUrl,
         },
         {
           onRequest: () => {
@@ -50,7 +54,7 @@ export default function SignInPage() {
             setIsLoading(false);
             toast.success("Welcome back! Sign in successful.");
 
-            router.push("/dashboard");
+            router.push(callbackUrl);
             router.refresh();
           },
 

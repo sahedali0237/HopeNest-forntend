@@ -7,9 +7,12 @@ import { authClient } from "@/lib/auth-client";
 
 const SocialLogIn = () => {
   const handleLogin = async (provider: "google" | "github") => {
+    const callbackUrl =
+      new URLSearchParams(window.location.search).get("callbackUrl") || "/";
+
     await authClient.signIn.social({
       provider: provider,
-      callbackURL: "/",
+      callbackURL: callbackUrl,
     });
   };
 
