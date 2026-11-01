@@ -3,23 +3,51 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
 import { cn } from "@/lib/utils";
+import { ChevronDown } from "lucide-react";
 
-const EVENT_TYPES = ["Cleanup", "Donation", "Plantation", "Awareness", "Healthcare"];
+const EVENT_TYPES = [
+  "Cleanup",
+  "Donation",
+  "Plantation",
+  "Awareness",
+  "Healthcare",
+];
 
 const Schema = z.object({
   title: z.string().min(1, "Title is required"),
   description: z.string().optional(),
-  eventType: z.string().refine((val) => EVENT_TYPES.includes(val), { message: "Valid event type required" }),
-  thumbnailUrl: z.string().url("Please enter a valid URL").optional().or(z.literal("")),
+  eventType: z
+    .string()
+    .min(1, "Event type is required")
+    .refine((val) => EVENT_TYPES.includes(val), {
+      message: "Valid event type required",
+    }),
+  thumbnailUrl: z
+    .string()
+    .url("Please enter a valid URL")
+    .optional()
+    .or(z.literal("")),
   location: z.string().min(1, "Location is required"),
-  eventDate: z.string().refine((val) => new Date(val) >= new Date(), { message: "Date must be a future date" }),
+  eventDate: z
+    .string()
+    .min(1, "Event date is required")
+    .refine(
+      (val) => {
+        const selected = new Date(val);
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+        return selected >= today;
+      },
+      {
+        message: "Date must be today or a future date",
+      },
+    ),
   creatorEmail: z.string().email().optional(),
 });
 
@@ -45,12 +73,19 @@ export const EventForm = ({
   const {
     register,
     handleSubmit,
-    formState: { errors },
-    reset,
     watch,
+    formState: { errors },
   } = useForm<z.infer<typeof Schema>>({
     resolver: zodResolver(Schema),
-    defaultValues: initialData,
+    defaultValues: {
+      title: initialData?.title || "",
+      description: initialData?.description || "",
+      eventType: initialData?.eventType || "",
+      thumbnailUrl: initialData?.thumbnailUrl || "",
+      location: initialData?.location || "",
+      eventDate: initialData?.eventDate || "",
+      creatorEmail: initialData?.creatorEmail || "",
+    },
   });
 
   const onSubmit = async (data: z.infer<typeof Schema>) => {
@@ -71,7 +106,9 @@ export const EventForm = ({
       }
 
       toast.success(
-        isUpdate ? "Event updated successfully!" : "Event created successfully!",
+        isUpdate
+          ? "Event updated successfully!"
+          : "Event created successfully!",
       );
       onSuccess?.(data);
       router.push("/manage-events");
@@ -89,6 +126,11 @@ export const EventForm = ({
   };
 
   const thumbnailUrl = watch("thumbnailUrl");
+  const selectedEventType = watch("eventType");
+  const currentDate = new Date();
+  const today = `${currentDate.getFullYear()}-${String(
+    currentDate.getMonth() + 1,
+  ).padStart(2, "0")}-${String(currentDate.getDate()).padStart(2, "0")}`;
 
   return (
     <form
@@ -103,11 +145,11 @@ export const EventForm = ({
             Event Title
           </label>
           <Input
-            {...register("title", { required: "Title is required" })}
+            {...register("title")}
             placeholder="Enter event title"
             className={cn(
-              "rounded-md border border-emerald-200 bg-yellow-50 px-3 py-2.5 text-stone-900 placeholder-stone-400 focus:ring-2 focus:ring-emerald-400 outline-none transition",
-              errors.title && "border-red-500 focus-visible:ring-red-500"
+              "w-full h-11 rounded-md border border-emerald-200 bg-yellow-50 px-3 py-2.5 text-stone-900 placeholder-stone-400 focus:ring-2 focus:ring-emerald-400 outline-none transition",
+              errors.title && "border-red-500 focus-visible:ring-red-500",
             )}
           />
           {errors.title && (
@@ -120,26 +162,34 @@ export const EventForm = ({
           <label className="block text-sm font-medium text-[#1F2937] mb-1">
             Event Type
           </label>
-          <Select
-            {...register("eventType", { required: "Event type is required" })}
-            className={cn(
-              "w-full rounded-md border border-emerald-200 bg-yellow-50 px-3 py-2.5 text-stone-900 placeholder-stone-400 focus:ring-2 focus:ring-emerald-400 outline-none transition",
-              errors.eventType && "border-red-500 focus-visible:ring-red-500"
-            )}
-          >
-            <SelectTrigger>
-              <SelectValue placeholder="Select event type" />
-            </SelectTrigger>
-            <SelectContent>
+          <div className="relative">
+            <select
+              {...register("eventType")}
+              className={cn(
+                "w-full h-11 appearance-none rounded-md border border-emerald-200 bg-yellow-50 px-3 pr-10 py-2.5 text-sm text-stone-900 focus:ring-2 focus:ring-emerald-400 outline-none transition",
+                !selectedEventType && "text-stone-400",
+                errors.eventType && "border-red-500 focus:ring-red-500",
+              )}
+            >
+              <option value="" disabled>
+                Select event type
+              </option>
               {EVENT_TYPES.map((type) => (
-                <SelectItem key={type} value={type}>
+                <option
+                  key={type}
+                  value={type}
+                  className="text-stone-900 bg-white"
+                >
                   {type}
-                </SelectItem>
+                </option>
               ))}
-            </SelectContent>
-          </Select>
+            </select>
+            <ChevronDown className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 h-4 w-4 text-stone-500" />
+          </div>
           {errors.eventType && (
-            <p className="mt-1 text-sm text-red-600">{errors.eventType.message}</p>
+            <p className="mt-1 text-sm text-red-600">
+              {errors.eventType.message}
+            </p>
           )}
         </div>
 
@@ -149,15 +199,18 @@ export const EventForm = ({
             Description
           </label>
           <textarea
-            {...register("description", {})} rows={3}
+            {...register("description")}
+            rows={3}
             placeholder="Describe your event..."
             className={cn(
               "rounded-md border border-emerald-200 bg-yellow-50 px-3 py-2.5 text-stone-900 placeholder-stone-400 focus:ring-2 focus:ring-emerald-400 outline-none transition w-full resize-none",
-              errors.description && "border-red-500 focus-visible:ring-red-500"
+              errors.description && "border-red-500 focus-visible:ring-red-500",
             )}
           />
           {errors.description && (
-            <p className="mt-1 text-sm text-red-600">{errors.description.message}</p>
+            <p className="mt-1 text-sm text-red-600">
+              {errors.description.message}
+            </p>
           )}
         </div>
 
@@ -168,23 +221,28 @@ export const EventForm = ({
           </label>
           <Input
             type="url"
-            {...register("thumbnailUrl", {})} placeholder="https://example.com/image.jpg"
+            {...register("thumbnailUrl")}
+            placeholder="https://example.com/image.jpg"
             className={cn(
-              "rounded-md border border-emerald-200 bg-yellow-50 px-3 py-2.5 text-stone-900 placeholder-stone-400 focus:ring-2 focus:ring-emerald-400 outline-none transition w-full",
-              errors.thumbnailUrl && "border-red-500 focus-visible:ring-red-500"
+              "w-full h-11 rounded-md border border-emerald-200 bg-yellow-50 px-3 py-2.5 text-stone-900 placeholder-stone-400 focus:ring-2 focus:ring-emerald-400 outline-none transition",
+              errors.thumbnailUrl &&
+                "border-red-500 focus-visible:ring-red-500",
             )}
           />
           {errors.thumbnailUrl && (
-            <p className="mt-1 text-sm text-red-600">{errors.thumbnailUrl.message}</p>
+            <p className="mt-1 text-sm text-red-600">
+              {errors.thumbnailUrl.message}
+            </p>
           )}
           {/* Live preview */}
           {thumbnailUrl && (
             <div className="mt-2">
               <p className="text-xs text-emerald-600 mb-1">Preview:</p>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src={thumbnailUrl}
                 alt="Preview"
-                className="max-h-32 w-auto rounded border border-emerald-200"
+                className="max-h-32 w-auto rounded border border-emerald-200 object-cover"
                 onError={(e) => {
                   e.currentTarget.style.display = "none";
                 }}
@@ -199,15 +257,17 @@ export const EventForm = ({
             Location
           </label>
           <Input
-            {...register("location", { required: "Location is required" })}
+            {...register("location")}
             placeholder="Enter location"
             className={cn(
-              "rounded-md border border-emerald-200 bg-yellow-50 px-3 py-2.5 text-stone-900 placeholder-stone-400 focus:ring-2 focus:ring-emerald-400 outline-none transition w-full",
-              errors.location && "border-red-500 focus-visible:ring-red-500"
+              "w-full h-11 rounded-md border border-emerald-200 bg-yellow-50 px-3 py-2.5 text-stone-900 placeholder-stone-400 focus:ring-2 focus:ring-emerald-400 outline-none transition",
+              errors.location && "border-red-500 focus-visible:ring-red-500",
             )}
           />
           {errors.location && (
-            <p className="mt-1 text-sm text-red-600">{errors.location.message}</p>
+            <p className="mt-1 text-sm text-red-600">
+              {errors.location.message}
+            </p>
           )}
         </div>
 
@@ -218,16 +278,17 @@ export const EventForm = ({
           </label>
           <Input
             type="date"
-            {...register("eventDate", {
-              required: "Event date is required",
-            })}
+            min={today}
+            {...register("eventDate")}
             className={cn(
-              "rounded-md border border-emerald-200 bg-yellow-50 px-3 py-2.5 text-stone-900 placeholder-stone-400 focus:ring-2 focus:ring-emerald-400 outline-none transition w-full",
-              errors.eventDate && "border-red-500 focus-visible:ring-red-500"
+              "w-full h-11 rounded-md border border-emerald-200 bg-yellow-50 px-3 py-2.5 text-stone-900 placeholder-stone-400 focus:ring-2 focus:ring-emerald-400 outline-none transition",
+              errors.eventDate && "border-red-500 focus-visible:ring-red-500",
             )}
           />
           {errors.eventDate && (
-            <p className="mt-1 text-sm text-red-600">{errors.eventDate.message}</p>
+            <p className="mt-1 text-sm text-red-600">
+              {errors.eventDate.message}
+            </p>
           )}
         </div>
 
@@ -238,11 +299,11 @@ export const EventForm = ({
               Creator Email
             </label>
             <Input
-              value={initialData.creatorEmail}
+              {...register("creatorEmail")}
               readOnly
-              className="rounded-md border border-emerald-200 bg-yellow-50 px-3 py-2.5 text-stone-900 placeholder-stone-400 outline-none transition w-full cursor-not-allowed"
+              className="w-full h-11 rounded-md border border-emerald-200 bg-yellow-50 px-3 py-2.5 text-stone-900 placeholder-stone-400 outline-none transition cursor-not-allowed"
             />
-            <p className="mt-1 text-xs text-emerald-500/80">
+            <p className="mt-1 text-xs text-emerald-600/80">
               Automatically set to your account email
             </p>
           </div>
@@ -254,9 +315,15 @@ export const EventForm = ({
         <Button
           type="submit"
           disabled={isSubmitting}
-          className="w-full rounded-md bg-emerald-600 px-4 py-2.5 text-sm font-medium text-white transition hover:bg-emerald-500 disabled:opacity-50"
+          className="w-full h-11 rounded-md bg-emerald-600 px-4 py-2.5 text-sm font-medium text-white transition hover:bg-emerald-500 disabled:opacity-50"
         >
-          {isSubmitting ? "Creating Event..." : "Create Event"}
+          {isSubmitting
+            ? isUpdate
+              ? "Updating Event..."
+              : "Creating Event..."
+            : isUpdate
+              ? "Update Event"
+              : "Create Event"}
         </Button>
       </div>
     </form>
