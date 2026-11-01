@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   ArrowLeft,
   Bookmark,
@@ -13,6 +13,8 @@ import {
   Users,
 } from "lucide-react";
 import { toast } from "react-toastify";
+import { useSession } from "@/hooks/use-session";
+import { useRouter } from "next/navigation";
 import {
   formatDetailDate,
   getTimeRange,
@@ -42,21 +44,68 @@ type Props = {
 export default function EventDetail({ detail, daysLeft }: Props) {
   const [isJoined, setIsJoined] = useState(false);
   const [isSaved, setIsSaved] = useState(false);
+  const [joinCount, setJoinCount] = useState(0);
+  const { user, isLoading: sessionLoading } = useSession();
+  const router = useRouter();
 
   const pill = TYPE_PILLS[detail.eventType] ?? "bg-stone-200 text-stone-700";
 
   const mapUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(detail.location || "Dhaka, Bangladesh")}`;
 
-  const handleJoin = () => {
-    if (isJoined) {
-      toast.info(`You've left "${detail.title}".`);
-      setIsJoined(false);
+  // Fetch the current user's join status for this event on mount
+  useEffect(() => {
+    if (sessionLoading) return;
 
+    const fetchJoinStatus = async () => {
+      try {
+        const res = await fetch(`/api/events/${detail._id}/join`, {
+          cache: "no-store",
+        });
+        if (!res.ok) return;
+        const data = await res.json();
+        setIsJoined(!!data.joined);
+        setJoinCount(typeof data.joinCount === "number" ? data.joinCount : 0);
+      } catch {
+        /* Join status is optional; fail silently */
+      }
+    };
+
+    fetchJoinStatus();
+  }, [sessionLoading, detail._id]);
+
+  const handleJoin = async () => {
+    if (!user) {
+      toast.error("Please log in to join this event.");
+      router.push("/signIn");
       return;
     }
 
-    toast.success(`You're going to "${detail.title}" — see you there!`);
-    setIsJoined(true);
+    if (isJoined) {
+      toast.info(`You've left "${detail.title}".`);
+      setIsJoined(false);
+      setJoinCount((prev) => Math.max(0, prev - 1));
+      return;
+    }
+
+    try {
+      const res = await fetch(`/api/events/${detail._id}/join`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+      });
+      const data = await res.json();
+
+      if (!res.ok) {
+        throw new Error(data.message || "Failed to join event");
+      }
+
+      toast.success(`You're going to "${detail.title}" — see you there!`);
+      setIsJoined(true);
+      setJoinCount(typeof data.joinCount === "number" ? data.joinCount : 0);
+    } catch (error) {
+      toast.error(
+        error instanceof Error ? error.message : "Failed to join event",
+      );
+    }
   };
 
   const handleSave = () => {
@@ -127,13 +176,17 @@ export default function EventDetail({ detail, daysLeft }: Props) {
                 <button
                   type="button"
                   onClick={handleJoin}
+                  disabled={sessionLoading}
                   className={`rounded-lg px-6 py-3 text-sm font-semibold text-white shadow-sm transition ${
                     isJoined
                       ? "bg-emerald-100 text-emerald-800 ring-1 ring-emerald-600/40 hover:bg-emerald-200"
                       : "bg-emerald-700 hover:bg-emerald-800"
                   }`}
                 >
-                  {isJoined ? "You're Going ✓" : "Join Event"}
+                  {isJoined ? `You're Going ✓` : `Join Event`}
+                  {joinCount > 0 && (
+                    <span className="ml-2 text-xs opacity-80">({joinCount})</span>
+                  )}
                 </button>
 
                 <button
@@ -174,7 +227,7 @@ export default function EventDetail({ detail, daysLeft }: Props) {
               <span className="flex items-center gap-2">
                 <Users size={16} className="shrink-0 text-emerald-700" />
                 <span className="font-semibold text-[#0b3b2e]">
-                  {detail.attendees} going
+                  {!sessionLoading ? joinCount : detail.attendees} going
                 </span>
               </span>
 

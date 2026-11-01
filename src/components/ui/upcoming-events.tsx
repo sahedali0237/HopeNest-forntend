@@ -65,34 +65,6 @@ const goingCount = (id: string) => {
   return 12 + (hash % 38);
 };
 
-/* Two rotated avatar initials next to the "N going" line */
-const AVATAR_COLORS = ["bg-emerald-200", "bg-orange-200", "bg-sky-200"];
-
-const AvatarStack = ({ id }: { id: string }) => {
-  const count = goingCount(id);
-  const initials = [
-    String.fromCharCode(65 + (count % 26)),
-    String.fromCharCode(65 + ((count * 7 + 3) % 26)),
-  ];
-
-  return (
-    <p className="mt-3 flex items-center gap-2 text-sm text-stone-600">
-      <span className="flex -space-x-2">
-        {initials.map((initial, index) => (
-          <span
-            key={index}
-            className={`flex size-6 items-center justify-center rounded-full text-[10px] font-bold text-stone-700 ring-2 ring-white ${AVATAR_COLORS[(count + index) % AVATAR_COLORS.length]}`}
-          >
-            {initial}
-          </span>
-        ))}
-      </span>
-      <Users size={15} className="shrink-0 text-emerald-700" />
-      {count} going
-    </p>
-  );
-};
-
 type Props = {
   /** Upcoming events fetched on the server (date >= today). */
   events: EventData[];
@@ -233,8 +205,6 @@ export default function UpcomingEvents({ events }: Props) {
                         />
                         {formatDate(event.eventDate)}
                       </p>
-
-                      <AvatarStack id={event._id} />
 
                       <button
                         onClick={() =>
