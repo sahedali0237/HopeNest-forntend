@@ -1,4 +1,4 @@
-const API_URL = `${process.env.BACKEND_URL}/events`;
+const API_URL = "/api/backend/events";
 
 type EventData = {
   _id: string;
@@ -12,8 +12,7 @@ type EventData = {
 
 const clean = (value: string | undefined) => (value ?? "").trim();
 
-/* The API returns some fields with stray whitespace (user-created data),
-   so normalize every record once on the server/ingest side. */
+
 const normalizeEvent = (event: Partial<EventData>): EventData => ({
   _id: String(event._id ?? Math.random().toString(36).slice(2)),
   title: clean(event.title),

@@ -10,7 +10,7 @@ import {
 /** Single-event lookup via the detail endpoint ("GET /events/:id"). */
 const fetchEventById = async (id: string): Promise<EventDetailData | null> => {
   try {
-    const res = await fetch(`${API_URL}/${id}`, { cache: "no-store" });
+    const res = await fetch(`${API_URL}/${id}`, { cache: "no-store", credentials: "include" });
 
     if (!res.ok) return null;
 
@@ -32,7 +32,7 @@ const fetchEventFromList = async (
   id: string,
 ): Promise<EventDetailData | null> => {
   try {
-    const res = await fetch(API_URL, { cache: "no-store" });
+    const res = await fetch(API_URL, { cache: "no-store", credentials: "include" });
 
     if (!res.ok) return null;
 

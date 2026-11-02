@@ -241,7 +241,7 @@ export default function EventsClient({
     setLoadError(null);
 
     try {
-      const res = await fetch(API_URL);
+      const res = await fetch(API_URL, { credentials: "include" });
 
       if (!res.ok) {
         throw new Error(`Request failed with status ${res.status}`);

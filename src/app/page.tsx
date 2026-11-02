@@ -14,7 +14,7 @@ export default async function Home() {
   try {
     if (!API_URL) throw new Error("API_URL is not configured");
 
-    const res = await fetch(API_URL, { cache: "no-store" });
+    const res = await fetch(API_URL, { cache: "no-store", credentials: "include" });
 
     if (res.ok) {
       const data = await res.json();

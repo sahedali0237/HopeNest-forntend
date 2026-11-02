@@ -10,7 +10,7 @@ export default async function EventsPage({
   let events: EventData[] = [];
 
   try {
-    const res = await fetch(API_URL);
+    const res = await fetch(API_URL, { cache: "no-store", credentials: "include" });
 
     if (!res.ok) {
       throw new Error(`Request failed with status ${res.status}`);
