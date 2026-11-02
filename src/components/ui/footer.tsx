@@ -26,7 +26,7 @@ const Footer = () => {
   ];
 
   const legalLinks = [
-    { name: "Privacy Policy", href: "/privacy", icon: ShieldCheck },
+    { name: "Privacy Policy", href: "/privacy-policy", icon: ShieldCheck },
     { name: "Terms of Service", href: "/terms", icon: FileText },
   ];
 

@@ -28,7 +28,6 @@ export default function ManageEventsPage() {
   const [eventToDelete, setEventToDelete] = useState<string | null>(null);
   const router = useRouter();
 
-  // Fetch user's events
   useEffect(() => {
     const fetchEvents = async () => {
       if (sessionLoading) return;

@@ -278,6 +278,8 @@ export default function EventDetail({ detail, daysLeft }: Props) {
                     <Image
                       src={detail.organizer.photoUrl}
                       alt={detail.organizer.name}
+                      width={48}
+                      height={48}
                       className="h-12 w-12 shrink-0 rounded-full object-cover"
                     />
                   ) : (
@@ -381,6 +383,8 @@ export default function EventDetail({ detail, daysLeft }: Props) {
                               key={avatar}
                               src={avatar}
                               alt="Attendee"
+                              width={28}
+                              height={28}
                               className="h-7 w-7 rounded-full object-cover ring-2 ring-white"
                             />
                           ))

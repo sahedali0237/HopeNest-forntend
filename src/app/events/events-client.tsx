@@ -407,6 +407,8 @@ export default function EventsClient({
                         <Image
                           src={event.thumbnailUrl}
                           alt={event.title}
+                          width={800}
+                          height={533}
                           loading="lazy"
                           className="h-full w-full object-cover transition duration-300 group-hover/img:scale-105"
                         />
