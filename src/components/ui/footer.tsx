@@ -11,7 +11,6 @@ import {
   Info,
   ShieldCheck,
   FileText,
-  Cookie,
 } from "lucide-react";
 import Image from "next/image";
 
@@ -27,7 +26,7 @@ const Footer = () => {
 
   const legalLinks = [
     { name: "Privacy Policy", href: "/privacy-policy", icon: ShieldCheck },
-    { name: "Terms of Service", href: "/terms", icon: FileText },
+    { name: "Terms of Service", href: "/terms-of-service", icon: FileText },
   ];
 
   const socialLinks = [
