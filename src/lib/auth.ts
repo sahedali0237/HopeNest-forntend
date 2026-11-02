@@ -26,5 +26,5 @@ export const auth = betterAuth({
   session: {
     expiresIn: 60 * 60 * 24 * 7, // 7 days
   },
-  trustedOrigins: ["http://localhost:3000"],
+  trustedOrigins: ["https://hope-nest-forntend.vercel.app"],
 });

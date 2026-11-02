@@ -28,7 +28,7 @@ export async function proxy(request: NextRequest) {
     // Proxy backend API requests: /api/backend/* -> BACKEND_URL/*
     if (pathname.startsWith('/api/backend')) {
         const backendPath = pathname.replace(/^\/api\/backend/, '') || '/'
-        const backendUrl = `${process.env.BACKEND_URL || 'http://localhost:5000'}${backendPath}${request.nextUrl.search}`
+        const backendUrl = `${process.env.BACKEND_URL}${backendPath}${request.nextUrl.search}`
 
         const hasBody = !['GET', 'HEAD'].includes(request.method)
 

@@ -5,7 +5,7 @@ const API_INFO = {
   version: "1.0.0",
   description:
     "Community-driven event management platform for creating, joining, and tracking social service events.",
-  baseUrl: process.env.BETTER_AUTH_URL || "http://localhost:3000",
+  baseUrl: process.env.BETTER_AUTH_URL,
   endpoints: {
     auth: {
       "POST /api/auth/sign-up": "Register a new user account",

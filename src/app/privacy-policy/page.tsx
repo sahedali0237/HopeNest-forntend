@@ -216,7 +216,7 @@ export default function PrivacyPolicyPage() {
             {/* Contact Card */}
             <section
               id="contact-us"
-              className="scroll-mt-24 rounded-2xl border border-amber-300 bg-gradient-to-br from-yellow-100/90 via-amber-50 to-white p-6 shadow-sm sm:p-8"
+              className="scroll-mt-24 rounded-2xl border border-amber-300 bg-linear-to-br from-yellow-100/90 via-amber-50 to-white p-6 shadow-sm sm:p-8"
             >
               <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
                 <div className="space-y-2">
