@@ -7,8 +7,7 @@ if (!uri) {
   throw new Error("Please define the MONGODB_URI environment variable in .env");
 }
 
-// Singleton pattern prevents creating a new MongoClient on every request,
-// which is especially important during Next.js hot-reloads in development.
+
 let client: MongoClient;
 let clientPromise: Promise<MongoClient>;
 
@@ -19,8 +18,7 @@ if (process.env.NODE_ENV === "development") {
   if (!globalWithMongo._mongoClientPromise) {
     client = new MongoClient(uri);
     globalWithMongo._mongoClientPromise = client.connect().catch((error) => {
-      // Never cache a failed connection: clear it so the next request retries
-      // with a fresh client instead of failing (500) until the server restarts.
+
       globalWithMongo._mongoClientPromise = undefined;
       throw error;
     });
