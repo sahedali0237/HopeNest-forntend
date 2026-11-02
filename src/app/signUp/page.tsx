@@ -139,7 +139,7 @@ export default function SignUpPage() {
                 id="fullName"
                 type="text"
                 autoComplete="name"
-                placeholder="John Doe"
+                placeholder="Sahed Ali"
                 disabled={isLoading}
                 aria-invalid={!!errors.fullName}
                 {...register("fullName", {

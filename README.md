@@ -1,55 +1,162 @@
-# HopeNest — Community-Driven Event Management Platform
+# HopeNest
 
-HopeNest is a social development events platform where users can create, join, and track community service events in their local area — from winter clothes distribution to blanket drives, plantation drives, and cleanup campaigns.
+HopeNest is a social-development events platform that helps people
+discover community initiatives, create events, and participate in
+activities that make a positive difference.
 
-## Live Site
-🌐 **[https://hopenest.vercel.app](https://hopenest.vercel.app)**
+## Live Website
+
+[Visit HopeNest](https://hope-nest-forntend.vercel.app/)
+
+## Repositories
+
+- **Frontend:** [HopeNest
+  Frontend](https://github.com/sahedali0237/HopeNest-forntend)
+- **Backend:** [HopeNest
+  Backend](https://github.com/sahedali0237/HopeNest-surver)
+
+✨ Key Features
+
+- 🗓️ Upcoming Events Discovery: Browse upcoming community events
+  in a responsive grid. Past events are filtered out automatically.
+- 🔐 Secure Authentication: Email/password and social login
+  powered by Better Auth with a MongoDB adapter. Password validation
+  requires at least one uppercase letter, one lowercase letter, and
+  six or more characters.
+- ➕ Create Events: Authenticated users can publish events with a
+  title, description, event type, thumbnail, location, and future
+  date. The creator's identity is associated with the event.
+- 🤝 Join Events: Anyone can view public event details, while
+  joining requires authentication. Participation is saved in the
+  database.
+- 🛠️ Manage Your Events: Event creators can update or delete their
+  own events, with ownership checks enforced by the backend.
+- 📅 Joined Events: View the events you have joined, organized by
+  event date.
+- 🛡️ JWT-Protected API: Private backend endpoints are protected by
+  JWT verification using JWKS.
+- 🌗 Light / Dark Mode: Switch between light and dark application
+  themes.
+- ✅ Form Validation: Login, registration, create-event, and
+  update-event forms provide validation and clear toast feedback.
+- 📱 Responsive Design: Optimized for mobile, tablet, and desktop
+  screens.
+- 🔄 Reload-Safe Routing: Application routes are designed to
+  remain accessible after a browser refresh, including authenticated
+  pages.
+
+## Technology Stack
+
+### Frontend
+
+- Next.js
+- React
+- Tailwind CSS
+- shadcn/ui
+- Better Auth
+
+### Backend
+
+- Node.js
+- Express.js
+- MongoDB
+- JWT verification with JWKS
+
+## Project Structure
+
+The frontend and backend are maintained in separate repositories:
+
+```text
+HopeNest/
+├── frontend/   # Next.js application
+└── backend/    # Express.js API
+```
 
 ## Getting Started
 
-First, run the development server:
+### 1. Clone the repositories
+
+```bash
+git clone https://github.com/sahedali0237/HopeNest-forntend.git
+git clone https://github.com/sahedali0237/HopeNest-surver.git
+```
+
+### 2. Set up the frontend
+
+```bash
+cd HopeNest-forntend
+npm install
+```
+
+Create a `.env` file in the frontend project and add the
+environment variables required by your frontend configuration. For
+example:
+
+```env
+# Add the API base URL and Better Auth configuration
+# using the variable names expected by your application.
+```
+
+Start the development server:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open <http://localhost:3000> in your browser.
 
-## Key Features
+### 3. Set up the backend
 
-- **Create Events** — Logged-in users can create social service events with title, description, event type, location, date, and thumbnail image URL. Includes form validation and future-date enforcement.
-- **Join Events** — Any logged-in user can join an upcoming event; participation records are saved in the database along with the user's details.
-- **Manage Events** — Event creators can view, update, and delete only their own events. Ownership is enforced on the backend via JWT verification.
-- **Upcoming Events** — Public listing of all upcoming events with filtering, search, and pagination. Past events are automatically excluded.
-- **User Profile** — View and update your name, profile photo URL, and bio. Changes reflect immediately across the navbar and profile page.
-- **Authentication** — Secure sign-in and sign-up with BetterAuth (email/password + Google & GitHub social providers). Password rules require at least one uppercase, one lowercase, and minimum 6 characters.
-- **Protected Routes** — Create Event, Manage Events, Joined Events, and Profile pages require login; private API endpoints are protected by JWT verification middleware.
+Open a second terminal:
 
-## Tech Stack
+```bash
+cd HopeNest-surver
+npm install
+```
 
-- **Framework:** Next.js (App Router)
-- **UI:** Shadcn UI + Tailwind CSS v4
-- **Authentication:** BetterAuth with MongoDB Adapter
-- **Database:** MongoDB
-- **Language:** TypeScript
+Create a `.env` file in the backend project:
 
-## Learn More
+```env
+PORT=5000
+MONGODB_URI=your_mongodb_connection_string
+JWKS_URI=your_better_auth_jwks_url
+FRONTEND_URI=http://localhost:3000
+```
 
-To learn more about Next.js, take a look at the following resources:
+Use the exact JWKS URL and environment variable values configured for
+your Better Auth setup. Do not commit real secrets or database
+credentials.
 
-- [Next.js Documentation](https://nextjs.org/docs) — learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) — an interactive Next.js tutorial.
+Start the backend using the script configured in its `package.json` (for
+example, `npm start` or `npm run dev`).
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) — your feedback and contributions are welcome!
+## Main User Flow
 
-## Deploy on Vercel
+1.  Visit HopeNest and explore available events.
+2.  Sign in or create an account to access authenticated features.
+3.  Create an event or open an existing event.
+4.  Join events that interest you.
+5.  Manage events you created and review events you joined.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Security Notes
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/building-your-application/deploying) for more details.
+- Keep database credentials and authentication secrets in environment
+  variables.
+- Never commit `.env` or `.env.local` files.
+- Protected API requests should include a valid authentication token.
+- The backend should verify the token and enforce event ownership
+  before allowing updates or deletion.
+
+## Future Improvements
+
+Potential improvements include richer event discovery and filtering,
+enhanced user profiles, notifications, and additional accessibility
+refinements.
+
+## Author
+
+**Sahed Ali**
+
+---
+
+HopeNest --- Connect with your community. Take part. Make a difference.
