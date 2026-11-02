@@ -12,6 +12,7 @@ import {
   Search,
 } from "lucide-react";
 import { API_URL, normalizeEvent, type EventData } from "./events-data";
+import Image from "next/image";
 
 const EVENTS_PER_PAGE = 6;
 
@@ -58,13 +59,9 @@ const formatDate = (date: string) => {
 };
 
 type Props = {
-  /** Pre-fetched events rendered on the server. */
   initialEvents: EventData[];
-  /** True when the server-side fetch to the events API failed. */
   fetchFailed: boolean;
-  /** Optional filter chip pre-selected via URL (?filter=...), e.g. from the hero. */
   initialFilter?: string;
-  /** Optional search text pre-filled via URL (?search=...), e.g. from the hero. */
   initialSearch?: string;
 };
 
@@ -407,7 +404,7 @@ export default function EventsClient({
                         aria-label={event.title}
                         className="group/img block h-full w-full"
                       >
-                        <img
+                        <Image
                           src={event.thumbnailUrl}
                           alt={event.title}
                           loading="lazy"

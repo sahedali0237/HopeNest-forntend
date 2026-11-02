@@ -1,4 +1,4 @@
-const API_URL = "/api/backend/events";
+const API_URL = "/api/events";
 
 type EventData = {
   _id: string;

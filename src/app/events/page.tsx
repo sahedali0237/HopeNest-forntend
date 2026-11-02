@@ -1,5 +1,10 @@
 import EventsClient from "./events-client";
-import { API_URL, normalizeEvent, type EventData } from "./events-data";
+import { normalizeEvent, type EventData } from "./events-data";
+import { getEventDocuments } from "./events-db";
+
+/* Rendered per request so the list always reflects the database — the first
+   render must never serve a cached empty/failed result. */
+export const dynamic = "force-dynamic";
 
 export default async function EventsPage({
   searchParams,
@@ -10,20 +15,16 @@ export default async function EventsPage({
   let events: EventData[] = [];
 
   try {
-    const res = await fetch(API_URL, { cache: "no-store", credentials: "include" });
-
-    if (!res.ok) {
-      throw new Error(`Request failed with status ${res.status}`);
-    }
-
-    const data = await res.json();
-
-    if (!Array.isArray(data)) {
-      throw new Error("Unexpected response from the events server");
-    }
-
-    events = data.map(normalizeEvent);
-  } catch {
+    // Same data source as the browser-side "Try Again" fetch (/api/events),
+    // but read directly so no relative server-side fetch can fail.
+    const docs = await getEventDocuments();
+    events = docs.map((doc) => normalizeEvent(doc as Partial<EventData>));
+  } catch (error) {
+    // Full stack in the terminal so any failure prints its exact reason.
+    console.error(
+      "[events] Failed to load events:",
+      error instanceof Error ? error.stack : error,
+    );
     fetchFailed = true;
   }
 

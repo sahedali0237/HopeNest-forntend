@@ -17,6 +17,12 @@ export async function GET(
 ) {
   try {
     const { id } = await params;
+
+    // Malformed ids must 404 instead of letting `new ObjectId()` throw a 500.
+    if (!ObjectId.isValid(id)) {
+      return NextResponse.json({ message: "Event not found" }, { status: 404 });
+    }
+
     const db = (await clientPromise).db("HopeNest");
     const collection = db.collection("data");
 
@@ -58,6 +64,12 @@ export async function DELETE(
     }
 
     const { id } = await params;
+
+    // Malformed ids must 404 instead of letting `new ObjectId()` throw a 500.
+    if (!ObjectId.isValid(id)) {
+      return NextResponse.json({ message: "Event not found" }, { status: 404 });
+    }
+
     const db = (await clientPromise).db("HopeNest");
     const collection = db.collection("data");
 
@@ -112,6 +124,12 @@ export async function PUT(
     }
 
     const { id } = await params;
+
+    // Malformed ids must 404 instead of letting `new ObjectId()` throw a 500.
+    if (!ObjectId.isValid(id)) {
+      return NextResponse.json({ message: "Event not found" }, { status: 404 });
+    }
+
     const body = await req.json();
     const db = (await clientPromise).db("HopeNest");
     const collection = db.collection("data");

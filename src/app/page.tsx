@@ -2,49 +2,47 @@ import Hero from "@/components/ui/hero";
 import InfoSection from "@/components/ui/info-section";
 import CommunityGallery from "@/components/ui/community-gallery";
 import UpcomingEvents from "@/components/ui/upcoming-events";
-import { API_URL, normalizeEvent, type EventData } from "./events/events-data";
+import { normalizeEvent, type EventData } from "./events/events-data";
+import { getEventDocuments } from "./events/events-db";
 
 /** How far ahead the homepage carousel previews events */
 const PREVIEW_LIMIT = 9;
+
+/* Events are read from MongoDB per request — never prerendered, so a failed
+   or empty first render can't be cached into the page. */
+export const dynamic = "force-dynamic";
 
 export default async function Home() {
   let locations: string[] = [];
   let upcoming: EventData[] = [];
 
   try {
-    if (!API_URL) throw new Error("API_URL is not configured");
+    const docs = await getEventDocuments();
+    const events = docs.map((doc) => normalizeEvent(doc as Partial<EventData>));
 
-    const res = await fetch(API_URL, { cache: "no-store", credentials: "include" });
+    locations = [
+      ...new Set(events.map((event) => event.location).filter(Boolean)),
+    ];
 
-    if (res.ok) {
-      const data = await res.json();
+    /* Only events dated today or later, soonest first */
+    const todayStart = new Date();
+    todayStart.setHours(0, 0, 0, 0);
+    const todayTime = todayStart.getTime();
 
-      if (Array.isArray(data)) {
-        const events = data.map(normalizeEvent);
-
-        locations = [
-          ...new Set(
-            events.map((event: EventData) => event.location).filter(Boolean),
-          ),
-        ];
-
-        /* Only events dated today or later, soonest first */
-        const todayStart = new Date();
-        todayStart.setHours(0, 0, 0, 0);
-        const todayTime = todayStart.getTime();
-
-        upcoming = events
-          .filter((event: EventData) => {
-            const time = new Date(event.eventDate).getTime();
-            return !Number.isNaN(time) && time >= todayTime;
-          })
-          .sort((a: EventData, b: EventData) =>
-            a.eventDate.localeCompare(b.eventDate),
-          )
-          .slice(0, PREVIEW_LIMIT);
-      }
-    }
-  } catch {}
+    upcoming = events
+      .filter((event) => {
+        const time = new Date(event.eventDate).getTime();
+        return !Number.isNaN(time) && time >= todayTime;
+      })
+      .sort((a, b) => a.eventDate.localeCompare(b.eventDate))
+      .slice(0, PREVIEW_LIMIT);
+  } catch (error) {
+    // Full stack in the terminal so an empty carousel always shows its cause.
+    console.error(
+      "[home] Failed to load upcoming events:",
+      error instanceof Error ? error.stack : error,
+    );
+  }
 
   return (
     <>
