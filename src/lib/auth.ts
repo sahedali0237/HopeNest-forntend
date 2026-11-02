@@ -1,4 +1,5 @@
 import { betterAuth } from "better-auth";
+import { jwt } from "better-auth/plugins";
 import { MongoClient } from "mongodb";
 import { mongodbAdapter } from "@better-auth/mongo-adapter";
 
@@ -6,6 +7,7 @@ const client = new MongoClient(process.env.MONGODB_URI as string);
 const db = client.db("HopeNest");
 
 export const auth = betterAuth({
+  baseURL: process.env.BETTER_AUTH_URL,
   secret: process.env.BETTER_AUTH_SECRET,
   database: mongodbAdapter(db, {
     client,
@@ -26,5 +28,11 @@ export const auth = betterAuth({
   session: {
     expiresIn: 60 * 60 * 24 * 7, // 7 days
   },
-  trustedOrigins: ["https://hope-nest-forntend.vercel.app"],
+  trustedOrigins: [
+    "http://localhost:3000",
+    "https://hope-nest-forntend.vercel.app",
+  ],
+  plugins: [
+    jwt(),
+  ],
 });
