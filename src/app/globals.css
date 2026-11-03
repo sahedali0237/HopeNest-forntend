@@ -1,10 +1,6 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
-/* @plugin "shadcn" {
-  --theme: "base-nova";
-  --radius: 0.5rem;
-} */
 
 @theme inline {
   --color-background: var(--background);

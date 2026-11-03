@@ -1,8 +1,10 @@
 "use client";
 
+
 import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { AvatarWithTooltip } from "@/components/ui/avatar-with-tooltip";
 import { useRouter, usePathname } from "next/navigation";
 import {
   X,
@@ -127,21 +129,23 @@ export const DashboardLayout = ({
           <div className="border-t border-emerald-500/20 pt-4 mt-6">
             {user ? (
               <div className="flex items-center gap-3 mb-4 px-1">
-                <div className="relative w-10 h-10 rounded-full bg-emerald-500 flex items-center justify-center shrink-0 overflow-hidden">
-                  {user.image ? (
-                    <Image
-                      src={user.image}
-                      alt={user.name}
-                      fill
-                      sizes="40px"
-                      className="object-cover"
-                    />
-                  ) : (
-                    <span className="text-white font-semibold text-sm">
-                      {user.name.charAt(0).toUpperCase()}
-                    </span>
-                  )}
-                </div>
+                <AvatarWithTooltip name={user.name}>
+                  <div className="relative w-10 h-10 rounded-full bg-emerald-500 flex items-center justify-center shrink-0 overflow-hidden">
+                    {user.image ? (
+                      <Image
+                        src={user.image}
+                        alt={user.name}
+                        fill
+                        sizes="40px"
+                        className="object-cover"
+                      />
+                    ) : (
+                      <span className="text-white font-semibold text-sm">
+                        {user.name.charAt(0).toUpperCase()}
+                      </span>
+                    )}
+                  </div>
+                </AvatarWithTooltip>
                 <div className="flex-1 min-w-0">
                   <p className="text-sm font-medium text-white truncate">
                     {user.name}

@@ -34,16 +34,16 @@ const Hero = ({ locations }: Props) => {
   return (
     <section className="relative overflow-hidden">
       {/* Background wash */}
-      <div className="absolute inset-0 bg-gradient-to-br from-emerald-100/70 via-yellow-50 to-orange-100/60" />
-      <div className="absolute -top-24 -left-32 size-[28rem] rounded-full bg-emerald-200/50 blur-3xl" />
+      <div className="absolute inset-0 bg-linear-to-br from-emerald-100/70 via-yellow-50 to-orange-100/60" />
+      <div className="absolute -top-24 -left-32 size-112 rounded-full bg-emerald-200/50 blur-3xl" />
       <div className="absolute top-10 right-1/3 size-80 rounded-full bg-yellow-200/50 blur-3xl" />
-      <div className="absolute -bottom-40 right-0 size-[26rem] rounded-full bg-orange-200/50 blur-3xl" />
+      <div className="absolute -bottom-40 right-0 size-104 rounded-full bg-orange-200/50 blur-3xl" />
 
       <div className="relative max-w-7xl mx-auto px-4 md:px-6 lg:px-8 py-14 lg:py-20">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-8 items-center">
           {/* Left: Copy + Search & Filter */}
           <div className="max-w-xl">
-            <h1 className="text-4xl sm:text-5xl xl:text-6xl font-extrabold tracking-tight text-foreground leading-tight">
+            <h1 className="text-4xl sm:text-5xl xl:text-6xl font-extrabold tracking-tight text-black leading-tight">
               Empower Your Community, Create Lasting Change
             </h1>
 
@@ -108,7 +108,7 @@ const Hero = ({ locations }: Props) => {
           </div>
 
           {/* Right: Photo collage */}
-          <div className="relative mx-auto w-full max-w-md lg:max-w-lg h-[24rem] sm:h-[27rem] lg:h-[30rem]">
+          <div className="relative mx-auto w-full max-w-md lg:max-w-lg h-96 sm:h-108 lg:h-120">
             {/* Purple wavy blob */}
             <svg
               viewBox="0 0 220 150"
@@ -153,7 +153,7 @@ const Hero = ({ locations }: Props) => {
             </div>
 
             {/* Bottom-right photo */}
-            <div className="absolute right-4 bottom-20 w-[36%] rotate-[-3deg] overflow-hidden rounded-2xl border-8 border-white shadow-2xl shadow-emerald-900/20">
+            <div className="absolute right-4 bottom-20 w-[36%] rotate-3 overflow-hidden rounded-2xl border-8 border-white shadow-2xl shadow-emerald-900/20">
               <Image
                 src="https://images.unsplash.com/photo-1416879595882-3373a0480b5b?auto=format&fit=crop&w=700&q=80"
                 alt="Community members working in the field"

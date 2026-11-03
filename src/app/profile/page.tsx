@@ -11,6 +11,7 @@ import { cn } from "@/lib/utils";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
+import { AvatarWithTooltip } from "@/components/ui/avatar-with-tooltip";
 import {
   User,
   Mail,
@@ -145,21 +146,23 @@ export default function ProfilePage() {
             <div className="relative px-6 pb-6 sm:px-8">
               <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
                 <div className="flex flex-col sm:flex-row sm:items-end gap-5 -mt-14 sm:-mt-16">
-                  <div className="relative h-28 w-28 sm:h-32 sm:w-32 rounded-2xl border-4 border-white bg-emerald-100 shadow-md overflow-hidden flex items-center justify-center shrink-0">
-                    {displayImage ? (
-                      <Image
-                        src={displayImage}
-                        alt={displayName}
-                        width={128}
-                        height={128}
-                        className="h-full w-full object-cover"
-                      />
-                    ) : (
-                      <span className="text-4xl font-bold text-emerald-700">
-                        {displayName.charAt(0).toUpperCase()}
-                      </span>
-                    )}
-                  </div>
+                  <AvatarWithTooltip name={displayName}>
+                    <div className="relative h-28 w-28 sm:h-32 sm:w-32 rounded-2xl border-4 border-white bg-emerald-100 shadow-md overflow-hidden flex items-center justify-center shrink-0">
+                      {displayImage ? (
+                        <Image
+                          src={displayImage}
+                          alt={displayName}
+                          width={128}
+                          height={128}
+                          className="h-full w-full object-cover"
+                        />
+                      ) : (
+                        <span className="text-4xl font-bold text-emerald-700">
+                          {displayName.charAt(0).toUpperCase()}
+                        </span>
+                      )}
+                    </div>
+                  </AvatarWithTooltip>
 
                   <div className="pt-1 sm:pb-1">
                     <div className="flex items-center gap-2 flex-wrap">

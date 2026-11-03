@@ -19,6 +19,7 @@ import {
 } from "lucide-react";
 import { useSession } from "@/hooks/use-session";
 import { authClient } from "@/lib/auth-client";
+import { AvatarWithTooltip } from "@/components/ui/avatar-with-tooltip";
 import { toast } from "react-toastify";
 import { useTheme } from "@/components/providers/theme-provider";
 
@@ -130,19 +131,21 @@ const Navbar = () => {
                     aria-expanded={isProfileMenuOpen}
                     aria-haspopup="true"
                   >
-                    <div className="w-8 h-8 rounded-full bg-primary flex items-center justify-center overflow-hidden ring-2 ring-primary">
-                      {user.image ? (
-                        <Image
-                          src={user.image}
-                          alt={user.name}
-                          className="w-full h-full object-cover"
-                          width={32}
-                          height={32}
-                        />
-                      ) : (
-                        <UserRound className="w-5 h-5 text-white" />
-                      )}
-                    </div>
+                    <AvatarWithTooltip name={user.name} placement="bottom">
+                      <div className="w-8 h-8 rounded-full bg-primary flex items-center justify-center overflow-hidden ring-2 ring-primary">
+                        {user.image ? (
+                          <Image
+                            src={user.image}
+                            alt={user.name}
+                            className="w-full h-full object-cover"
+                            width={32}
+                            height={32}
+                          />
+                        ) : (
+                          <UserRound className="w-5 h-5 text-white" />
+                        )}
+                      </div>
+                    </AvatarWithTooltip>
                     <span className="hidden sm:inline-block">{user.name}</span>
                     <ChevronDown className="w-4 h-4" />
                   </button>
@@ -324,19 +327,21 @@ const Navbar = () => {
               ) : user ? (
                 <div className="space-y-2">
                   <div className="flex items-center gap-3 px-4 py-3 rounded-lg bg-primary/10">
-                    <div className="w-10 h-10 rounded-full bg-primary flex items-center justify-center overflow-hidden ring-2 ring-primary">
-                      {user.image ? (
-                        <Image
-                          src={user.image}
-                          alt={user.name}
-                          className="w-full h-full object-cover"
-                          width={40}
-                          height={40}
-                        />
-                      ) : (
-                        <UserRound className="w-6 h-6 text-white" />
-                      )}
-                    </div>
+                    <AvatarWithTooltip name={user.name} placement="bottom">
+                      <div className="w-10 h-10 rounded-full bg-primary flex items-center justify-center overflow-hidden ring-2 ring-primary">
+                        {user.image ? (
+                          <Image
+                            src={user.image}
+                            alt={user.name}
+                            className="w-full h-full object-cover"
+                            width={40}
+                            height={40}
+                          />
+                        ) : (
+                          <UserRound className="w-6 h-6 text-white" />
+                        )}
+                      </div>
+                    </AvatarWithTooltip>
                     <div>
                       <p className="font-semibold text-foreground">{user.name}</p>
                       <p className="text-sm text-primary">{user.email}</p>
