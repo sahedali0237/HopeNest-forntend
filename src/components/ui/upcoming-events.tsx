@@ -69,7 +69,7 @@ const CarouselNav = () => {
     useCarousel();
 
   const base =
-    "absolute top-1/2 z-10 flex size-9 -translate-y-1/2 items-center justify-center rounded-full border border-stone-200 bg-white text-stone-700 shadow-md transition hover:border-emerald-700 hover:text-emerald-800";
+    "absolute top-1/2 z-10 flex size-9 -translate-y-1/2 items-center justify-center rounded-full border border-border bg-card text-foreground shadow-md transition hover:border-primary hover:text-primary";
 
   return (
     <>
@@ -102,21 +102,21 @@ export default function UpcomingEvents({ events }: Props) {
   const play = useCallback(() => autoplay.play(), [autoplay]);
 
   return (
-    <section className="bg-[#F5F5F0]">
+    <section className="bg-muted/50">
       <div className="mx-auto max-w-7xl px-4 py-14 md:px-6 lg:px-8 lg:py-16">
         <div className="mb-8 flex items-end justify-between">
           <div>
-            <h2 className="text-2xl font-bold text-[#0b3b2e] sm:text-3xl">
+            <h2 className="text-2xl font-bold text-foreground sm:text-3xl">
               Upcoming Events
             </h2>
-            <p className="mt-1.5 text-sm text-stone-500 sm:text-base">
+            <p className="mt-1.5 text-sm text-muted-foreground sm:text-base">
               Join hands near you — here&apos;s what&apos;s happening next.
             </p>
           </div>
 
           <Link
             href="/events"
-            className="group flex shrink-0 items-center gap-1 text-sm font-semibold text-emerald-800 transition hover:text-emerald-600"
+            className="group flex shrink-0 items-center gap-1 text-sm font-semibold text-primary transition hover:text-primary/80"
           >
             View All
             <ArrowRight
@@ -127,11 +127,11 @@ export default function UpcomingEvents({ events }: Props) {
         </div>
 
         {events.length === 0 ? (
-          <div className="rounded-xl border border-stone-200 bg-white px-6 py-14 text-center">
-            <p className="text-lg font-semibold text-stone-900">
+          <div className="rounded-xl border border-border bg-card px-6 py-14 text-center">
+            <p className="text-lg font-semibold text-foreground">
               No upcoming events yet
             </p>
-            <p className="mt-1 text-sm text-stone-500">
+            <p className="mt-1 text-sm text-muted-foreground">
               Check back soon, or head to the events page to create one.
             </p>
           </div>
@@ -149,7 +149,7 @@ export default function UpcomingEvents({ events }: Props) {
                   key={event._id}
                   className="basis-full pl-5 sm:basis-1/2 lg:basis-1/3"
                 >
-                  <article className="flex h-full flex-col overflow-hidden rounded-xl border border-stone-200 bg-white shadow-sm transition duration-200 hover:-translate-y-1 hover:shadow-md">
+                  <article className="flex h-full flex-col overflow-hidden rounded-xl border border-border bg-card shadow-sm transition duration-200 hover:-translate-y-1 hover:shadow-md">
                     <Link href={`/events/${event._id}`} className="block">
                       <div className="relative h-44 w-full bg-stone-100">
                         {event.thumbnailUrl ? (
@@ -162,7 +162,7 @@ export default function UpcomingEvents({ events }: Props) {
                             className="h-full w-full object-cover transition-transform duration-200 hover:scale-105"
                           />
                         ) : (
-                          <div className="flex h-full items-center justify-center text-sm text-stone-400">
+                          <div className="flex h-full items-center justify-center text-sm text-muted-foreground">
                             No image available
                           </div>
                         )}
@@ -177,22 +177,22 @@ export default function UpcomingEvents({ events }: Props) {
 
                     {/* Card Body */}
                     <div className="flex flex-1 flex-col p-4 sm:p-5">
-                      <h3 className="font-semibold text-stone-900">
+                      <h3 className="font-semibold text-foreground">
                         {event.title}
                       </h3>
 
-                      <p className="mt-2.5 flex items-center gap-2 text-sm text-stone-600">
+                      <p className="mt-2.5 flex items-center gap-2 text-sm text-muted-foreground">
                         <MapPin
                           size={15}
-                          className="shrink-0 text-emerald-700"
+                          className="shrink-0 text-primary"
                         />
                         {event.location || "Location to be announced"}
                       </p>
 
-                      <p className="mt-1.5 flex items-center gap-2 text-sm break-broken-words text-stone-600">
+                      <p className="mt-1.5 flex items-center gap-2 text-sm break-broken-words text-muted-foreground">
                         <CalendarDays
                           size={15}
-                          className="shrink-0 text-emerald-700"
+                          className="shrink-0 text-primary"
                         />
                         {formatDate(event.eventDate)}
                       </p>

@@ -7,11 +7,11 @@ import React from "react";
 
 export default function About() {
   return (
-    <section className="py-24 bg-yellow-50 min-h-screen text-yellow-900 font-sans selection:bg-yellow-200 selection:text-yellow-950">
+    <section className="py-24 bg-muted/50 min-h-screen text-foreground font-sans selection:bg-primary/20 selection:text-primary-foreground">
       <div className="max-w-7xl mx-auto px-4 md:px-6 lg:px-8">
         {/* Header/Intro Section */}
         <div className="mb-20 text-center md:text-left flex flex-col items-center md:items-start relative z-10">
-          <div className="inline-flex items-center gap-2 rounded-full bg-yellow-100 border border-yellow-200 px-4 py-1.5 text-sm font-medium text-yellow-800 mb-6 backdrop-blur-sm">
+          <div className="inline-flex items-center gap-2 rounded-full bg-primary/10 border border-primary/20 px-4 py-1.5 text-sm font-medium text-primary mb-6 backdrop-blur-sm">
             <svg
               className="size-4"
               viewBox="0 0 24 24"
@@ -22,11 +22,11 @@ export default function About() {
             </svg>
             About HopeNest
           </div>
-          <h1 className="text-4xl sm:text-5xl xl:text-7xl font-bold tracking-tight text-yellow-950 mb-6">
+          <h1 className="text-4xl sm:text-5xl xl:text-7xl font-bold tracking-tight text-foreground mb-6">
             Building Communities <br className="hidden md:block" />
-            Through <span className="text-yellow-600">Events.</span>
+            Through <span className="text-primary">Events.</span>
           </h1>
-          <p className="text-lg text-yellow-800/80 leading-relaxed max-w-2xl">
+          <p className="text-lg text-muted-foreground leading-relaxed max-w-2xl">
             HopeNest is a community-driven platform designed to connect
             volunteers, organizers, and donors around meaningful social-impact
             events. From plant drives and donation collections to community
@@ -38,7 +38,7 @@ export default function About() {
         {/* Mission, Vision & Impact Cards (Warm Glassmorphism) */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mb-20">
           {/* Mission Card */}
-          <div className="group relative rounded-3xl overflow-hidden bg-white/60 backdrop-blur-md border border-yellow-200/60 hover:border-yellow-400 hover:-translate-y-2 hover:shadow-xl hover:shadow-yellow-600/10 transition-all duration-500">
+          <div className="group relative rounded-3xl overflow-hidden bg-card/60 backdrop-blur-md border border-border hover:border-primary hover:-translate-y-2 hover:shadow-xl hover:shadow-primary/10 transition-all duration-500">
             <div className="relative h-56 w-full">
               <Image
                 src="https://images.unsplash.com/photo-1466692476868-aef1dfb1e735?auto=format&fit=crop&w=800&q=80"
@@ -47,16 +47,16 @@ export default function About() {
                 className="object-cover opacity-60 group-hover:opacity-80 transition-opacity duration-500 grayscale group-hover:grayscale-0"
                 priority
               />
-              <div className="absolute inset-0 bg-linear-to-t from-yellow-50 via-yellow-50/80 to-transparent" />
+              <div className="absolute inset-0 bg-linear-to-t from-muted via-muted/80 to-transparent" />
             </div>
             <div className="absolute bottom-0 left-0 right-0 p-8">
-              <div className="size-12 flex items-center justify-center rounded-2xl bg-yellow-100 border border-yellow-200 mb-4 group-hover:scale-110 transition-transform duration-300">
-                <Calendar className="size-6 text-yellow-600" />
+              <div className="size-12 flex items-center justify-center rounded-2xl bg-primary/10 border border-primary/20 mb-4 group-hover:scale-110 transition-transform duration-300">
+                <Calendar className="size-6 text-primary" />
               </div>
-              <h3 className="text-xl font-semibold text-yellow-950 group-hover:text-yellow-700 transition-colors">
+              <h3 className="text-xl font-semibold text-foreground group-hover:text-primary transition-colors">
                 Our Mission
               </h3>
-              <p className="mt-2 text-sm text-yellow-800/80 leading-relaxed">
+              <p className="mt-2 text-sm text-muted-foreground leading-relaxed">
                 Empowering volunteers and organizers to create social impact
                 through accessible, transparent, and community-driven event
                 management.
@@ -73,16 +73,16 @@ export default function About() {
                 fill
                 className="object-cover opacity-60 group-hover:opacity-80 transition-opacity duration-500 grayscale group-hover:grayscale-0"
               />
-              <div className="absolute inset-0 bg-linear-to-t from-yellow-50 via-yellow-50/80 to-transparent" />
+              <div className="absolute inset-0 bg-linear-to-t from-muted via-muted/80 to-transparent" />
             </div>
             <div className="absolute bottom-0 left-0 right-0 p-8">
-              <div className="size-12 flex items-center justify-center rounded-2xl bg-yellow-100 border border-yellow-200 mb-4 group-hover:scale-110 transition-transform duration-300">
-                <Heart className="size-6 text-yellow-600" />
+              <div className="size-12 flex items-center justify-center rounded-2xl bg-primary/10 border border-primary/20 mb-4 group-hover:scale-110 transition-transform duration-300">
+                <Heart className="size-6 text-primary" />
               </div>
-              <h3 className="text-xl font-semibold text-yellow-950 group-hover:text-yellow-700 transition-colors">
+              <h3 className="text-xl font-semibold text-foreground group-hover:text-primary transition-colors">
                 Our Vision
               </h3>
-              <p className="mt-2 text-sm text-yellow-800/80 leading-relaxed">
+              <p className="mt-2 text-sm text-muted-foreground leading-relaxed">
                 A world where anyone can easily find and participate in events
                 that strengthen communities and create lasting positive change.
               </p>
@@ -98,16 +98,16 @@ export default function About() {
                 fill
                 className="object-cover opacity-60 group-hover:opacity-80 transition-opacity duration-500 grayscale group-hover:grayscale-0"
               />
-              <div className="absolute inset-0 bg-linear-to-t from-yellow-50 via-yellow-50/80 to-transparent" />
+              <div className="absolute inset-0 bg-linear-to-t from-muted via-muted/80 to-transparent" />
             </div>
             <div className="absolute bottom-0 left-0 right-0 p-8">
-              <div className="size-12 flex items-center justify-center rounded-2xl bg-yellow-100 border border-yellow-200 mb-4 group-hover:scale-110 transition-transform duration-300">
-                <MapPin className="size-6 text-yellow-600" />
+              <div className="size-12 flex items-center justify-center rounded-2xl bg-primary/10 border border-primary/20 mb-4 group-hover:scale-110 transition-transform duration-300">
+                <MapPin className="size-6 text-primary" />
               </div>
-              <h3 className="text-xl font-semibold text-yellow-950 group-hover:text-yellow-700 transition-colors">
+              <h3 className="text-xl font-semibold text-foreground group-hover:text-primary transition-colors">
                 Impact
               </h3>
-              <p className="mt-2 text-sm text-yellow-800/80 leading-relaxed">
+              <p className="mt-2 text-sm text-muted-foreground leading-relaxed">
                 Over 500+ events organized, 10,000+ volunteers empowered, and
                 growing every day. Join us in building stronger communities.
               </p>
@@ -116,8 +116,8 @@ export default function About() {
         </div>
 
         {/* How It Works Section */}
-        <div className="rounded-3xl bg-white/40 border border-yellow-200/80 p-8 md:p-12 backdrop-blur-sm shadow-sm">
-          <h2 className="text-3xl font-bold text-yellow-950 mb-10 text-center md:text-left">
+        <div className="rounded-3xl bg-card/40 border border-border p-8 md:p-12 backdrop-blur-sm shadow-sm">
+          <h2 className="text-3xl font-bold text-foreground mb-10 text-center md:text-left">
             How It Works
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -140,18 +140,18 @@ export default function About() {
             ].map((item, i) => (
               <div
                 key={i}
-                className="flex flex-col items-center text-center md:items-start md:text-left gap-4 p-6 rounded-2xl hover:bg-yellow-100/50 transition-colors border border-transparent hover:border-yellow-200/50"
+                className="flex flex-col items-center text-center md:items-start md:text-left gap-4 p-6 rounded-2xl hover:bg-muted/50 transition-colors border border-transparent hover:border-border/50"
               >
-                <div className="size-12 rounded-full bg-yellow-200/50 border border-yellow-300 flex items-center justify-center shrink-0">
-                  <span className="text-xl font-bold text-yellow-700">
+                <div className="size-12 rounded-full bg-primary/10 border border-primary/20 flex items-center justify-center shrink-0">
+                  <span className="text-xl font-bold text-primary">
                     {item.step}
                   </span>
                 </div>
                 <div>
-                  <h4 className="font-semibold text-lg text-yellow-950 mb-2">
+                  <h4 className="font-semibold text-lg text-foreground mb-2">
                     {item.title}
                   </h4>
-                  <p className="text-sm text-yellow-800/80 leading-relaxed">
+                  <p className="text-sm text-muted-foreground leading-relaxed">
                     {item.desc}
                   </p>
                 </div>
@@ -161,14 +161,14 @@ export default function About() {
         </div>
 
         {/* Get Involved CTA */}
-        <div className="relative mt-24 rounded-3xl overflow-hidden min-h-100 flex items-center border border-yellow-200 shadow-lg group">
+        <div className="relative mt-24 rounded-3xl overflow-hidden min-h-100 flex items-center border border-border shadow-lg group">
           <Image
             src="https://images.unsplash.com/photo-1578665475429-4e971e8332c4?auto=format&fit=crop&w=1600&q=80"
             alt="Community event with people gathered"
             fill
             className="object-cover opacity-70 group-hover:scale-105 transition-transform duration-700 ease-in-out"
           />
-          <div className="absolute inset-0 bg-linear-to-r from-yellow-900/90 via-yellow-900/70 to-transparent" />
+          <div className="absolute inset-0 bg-linear-to-r from-emerald-900/90 via-emerald-900/70 to-transparent" />
 
           <div className="relative w-full max-w-3xl px-8 md:px-16 py-16 md:py-24 z-10">
             <h2 className="text-4xl md:text-6xl font-bold text-white mb-6 tracking-tight">
@@ -183,13 +183,13 @@ export default function About() {
             <div className="flex flex-col sm:flex-row gap-5">
               <Link
                 href="/events"
-                className="bg-yellow-400 text-yellow-950 px-8 py-4 rounded-xl font-bold text-sm transition-all hover:bg-yellow-300 hover:shadow-[0_0_20px_rgba(250,204,21,0.4)] text-center shadow-md"
+                className="bg-primary text-primary-foreground px-8 py-4 rounded-xl font-bold text-sm transition-all hover:bg-primary/90 hover:shadow-[0_0_20px_rgba(16,185,129,0.4)] text-center shadow-md"
               >
                 Browse Events
               </Link>
               <Link
                 href="/create-events"
-                className="bg-white/10 backdrop-blur-md border border-white/30 px-8 py-4 rounded-xl font-semibold text-white transition-all hover:bg-white/20 hover:border-white/50 text-center"
+                className="bg-primary/10 backdrop-blur-md border border-primary/30 px-8 py-4 rounded-xl font-semibold text-primary transition-all hover:bg-primary/20 hover:border-primary/50 text-center"
               >
                 Create Event
               </Link>

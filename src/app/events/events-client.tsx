@@ -263,7 +263,7 @@ export default function EventsClient({
   };
 
   return (
-    <div className="min-h-screen bg-[#F5F5F0]">
+    <div className="min-h-screen bg-muted/50">
       {/* Hero Banner */}
       <section
         className="relative flex flex-col justify-end bg-cover bg-center"
@@ -300,7 +300,7 @@ export default function EventsClient({
               className={`rounded-full border px-4 py-2 text-sm font-medium transition ${
                 activeFilter === filter.name
                   ? filter.style
-                  : "border-stone-300 bg-white text-stone-700 hover:border-emerald-700 hover:text-emerald-800"
+                  : "border-border bg-card text-foreground hover:border-primary hover:text-primary"
               }`}
             >
               {filter.name} ({filter.count})
@@ -313,7 +313,7 @@ export default function EventsClient({
           <div className="relative sm:max-w-xs sm:flex-1">
             <Search
               size={16}
-              className="absolute left-3.5 top-1/2 -translate-y-1/2 text-stone-400"
+              className="absolute left-3.5 top-1/2 -translate-y-1/2 text-muted-foreground"
             />
 
             <input
@@ -321,14 +321,14 @@ export default function EventsClient({
               placeholder="Search events..."
               value={searchQuery}
               onChange={(e) => handleSearchChange(e.target.value)}
-              className="block w-full rounded-full border border-stone-200 bg-white py-2.5 pl-10 pr-4 text-sm text-stone-900 placeholder-stone-400 outline-none transition focus:border-emerald-800 focus:ring-2 focus:ring-emerald-800/20"
+              className="block w-full rounded-full border border-border bg-card py-2.5 pl-10 pr-4 text-sm text-foreground placeholder-muted-foreground outline-none transition focus:border-primary focus:ring-2 focus:ring-primary/20"
             />
           </div>
 
           <select
             value={sortBy}
             onChange={(e) => handleSortChange(e.target.value)}
-            className="rounded-full border border-stone-200 bg-white px-4 py-2.5 text-sm text-stone-700 outline-none transition focus:border-emerald-800 focus:ring-2 focus:ring-emerald-800/20"
+            className="rounded-full border border-border bg-card px-4 py-2.5 text-sm text-foreground outline-none transition focus:border-primary focus:ring-2 focus:ring-primary/20"
           >
             <option value="latest">Sort by: Latest</option>
             <option value="oldest">Sort by: Oldest</option>
@@ -337,19 +337,19 @@ export default function EventsClient({
 
         {/* Error State */}
         {loadError && !isLoading ? (
-          <div className="flex flex-col items-center gap-4 rounded-xl border border-stone-200 bg-white px-6 py-16 text-center">
-            <AlertCircle size={40} className="text-rose-500" />
+          <div className="flex flex-col items-center gap-4 rounded-xl border border-border bg-card px-6 py-16 text-center">
+            <AlertCircle size={40} className="text-destructive" />
 
             <div>
-              <p className="font-semibold text-stone-900">
+              <p className="font-semibold text-foreground">
                 Failed to load events
               </p>
-              <p className="mt-1 text-sm text-stone-500">{loadError}</p>
+              <p className="mt-1 text-sm text-muted-foreground">{loadError}</p>
             </div>
 
             <button
               onClick={refetchEvents}
-              className="inline-flex items-center gap-2 rounded-md bg-emerald-800 px-5 py-2.5 text-sm font-medium text-white transition hover:bg-emerald-900"
+              className="inline-flex items-center gap-2 rounded-md bg-primary px-5 py-2.5 text-sm font-medium text-primary-foreground transition hover:bg-primary/90"
             >
               <RefreshCcw size={15} />
               Try Again
@@ -361,27 +361,27 @@ export default function EventsClient({
             {Array.from({ length: 6 }).map((_, index) => (
               <div
                 key={index}
-                className="animate-pulse overflow-hidden rounded-xl border border-stone-200 bg-white"
+                className="animate-pulse overflow-hidden rounded-xl border border-border bg-card"
               >
-                <div className="h-44 w-full bg-stone-200" />
+                <div className="h-44 w-full bg-muted" />
 
                 <div className="space-y-3 p-4">
-                  <div className="h-4 w-2/3 rounded bg-stone-200" />
-                  <div className="h-3 w-1/2 rounded bg-stone-200" />
-                  <div className="h-3 w-2/5 rounded bg-stone-200" />
+                  <div className="h-4 w-2/3 rounded bg-muted" />
+                  <div className="h-3 w-1/2 rounded bg-muted" />
+                  <div className="h-3 w-2/5 rounded bg-muted" />
 
-                  <div className="mt-4 h-10 w-full rounded-md bg-stone-200" />
+                  <div className="mt-4 h-10 w-full rounded-md bg-muted" />
                 </div>
               </div>
             ))}
           </div>
         ) : paginatedEvents.length === 0 ? (
           /* Empty State */
-          <div className="rounded-xl border border-stone-200 bg-white px-6 py-16 text-center">
-            <p className="text-lg font-semibold text-stone-900">
+          <div className="rounded-xl border border-border bg-card px-6 py-16 text-center">
+            <p className="text-lg font-semibold text-foreground">
               No events found
             </p>
-            <p className="mt-1 text-sm text-stone-500">
+            <p className="mt-1 text-sm text-muted-foreground">
               Try a different filter or search term, or create your own event.
             </p>
           </div>
@@ -394,10 +394,10 @@ export default function EventsClient({
               return (
                 <article
                   key={event._id}
-                  className="flex flex-col overflow-hidden rounded-xl border border-stone-200 bg-white shadow-sm transition duration-200 hover:-translate-y-1 hover:shadow-md"
+                  className="flex flex-col overflow-hidden rounded-xl border border-border bg-card shadow-sm transition duration-200 hover:-translate-y-1 hover:shadow-md"
                 >
                   {/* Thumbnail + Type Badge */}
-                  <div className="relative h-44 w-full bg-stone-100">
+                  <div className="relative h-44 w-full bg-muted">
                     {event.thumbnailUrl ? (
                       <Link
                         href={`/events/${event._id}`}
@@ -414,7 +414,7 @@ export default function EventsClient({
                         />
                       </Link>
                     ) : (
-                      <div className="flex h-full items-center justify-center text-sm text-stone-400">
+                      <div className="flex h-full items-center justify-center text-sm text-muted-foreground">
                         No image available
                       </div>
                     )}
@@ -428,19 +428,19 @@ export default function EventsClient({
 
                   {/* Card Body */}
                   <div className="flex flex-1 flex-col p-4 sm:p-5">
-                    <h3 className="font-semibold text-stone-900">
+                    <h3 className="font-semibold text-foreground">
                       {event.title}
                     </h3>
 
-                    <p className="mt-2.5 flex items-center gap-2 text-sm text-stone-600">
-                      <MapPin size={15} className="shrink-0 text-emerald-700" />
+                    <p className="mt-2.5 flex items-center gap-2 text-sm text-muted-foreground">
+                      <MapPin size={15} className="shrink-0 text-primary" />
                       {event.location || "Location to be announced"}
                     </p>
 
-                    <p className="mt-1.5 flex items-center gap-2 text-sm text-stone-600">
+                    <p className="mt-1.5 flex items-center gap-2 text-sm text-muted-foreground">
                       <CalendarDays
                         size={15}
-                        className="shrink-0 text-emerald-700"
+                        className="shrink-0 text-primary"
                       />
                       {formatDate(event.eventDate)}
                     </p>
@@ -467,14 +467,14 @@ export default function EventsClient({
               onClick={() => setCurrentPage(safePage - 1)}
               disabled={safePage === 1}
               aria-label="Previous page"
-              className="flex h-9 w-9 items-center justify-center rounded-full border border-stone-300 bg-white text-stone-700 transition hover:border-emerald-700 hover:text-emerald-800 disabled:cursor-not-allowed disabled:opacity-40"
+              className="flex h-9 w-9 items-center justify-center rounded-full border border-border bg-card text-foreground transition hover:border-primary hover:text-primary disabled:cursor-not-allowed disabled:opacity-40"
             >
               <ChevronLeft size={17} />
             </button>
 
             {pageNumbers.map((page, index) =>
               page === "…" ? (
-                <span key={`ellipsis-${index}`} className="px-1 text-stone-400">
+                <span key={`ellipsis-${index}`} className="px-1 text-muted-foreground">
                   …
                 </span>
               ) : (
@@ -484,8 +484,8 @@ export default function EventsClient({
                   aria-current={safePage === page ? "page" : undefined}
                   className={`h-9 w-9 rounded-full border text-sm font-medium transition ${
                     safePage === page
-                      ? "border-emerald-800 bg-emerald-800 text-white"
-                      : "border-stone-300 bg-white text-stone-700 hover:border-emerald-700 hover:text-emerald-800"
+                      ? "border-primary bg-primary text-primary-foreground"
+                      : "border-border bg-card text-foreground hover:border-primary hover:text-primary"
                   }`}
                 >
                   {page}
@@ -497,7 +497,7 @@ export default function EventsClient({
               onClick={() => setCurrentPage(safePage + 1)}
               disabled={safePage === totalPages}
               aria-label="Next page"
-              className="flex h-9 w-9 items-center justify-center rounded-full border border-stone-300 bg-white text-stone-700 transition hover:border-emerald-700 hover:text-emerald-800 disabled:cursor-not-allowed disabled:opacity-40"
+              className="flex h-9 w-9 items-center justify-center rounded-full border border-border bg-card text-foreground transition hover:border-primary hover:text-primary disabled:cursor-not-allowed disabled:opacity-40"
             >
               <ChevronRight size={17} />
             </button>

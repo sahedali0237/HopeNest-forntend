@@ -50,11 +50,11 @@ export const DashboardLayout = ({
   };
 
   return (
-    <div className="min-h-screen bg-yellow-50 flex flex-col md:flex-row">
+    <div className="min-h-screen bg-background flex flex-col md:flex-row">
       {/* Mobile Menu Button (hidden on desktop) */}
       <button
         onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-        className="md:hidden fixed top-4 left-4 z-50 flex items-center justify-center p-2 rounded-lg text-emerald-700 hover:text-emerald-800 transition-colors bg-white shadow-md"
+        className="md:hidden fixed top-4 left-4 z-50 flex items-center justify-center p-2 rounded-lg text-primary hover:text-primary/80 transition-colors bg-card shadow-md"
         aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
       >
         {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}

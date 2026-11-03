@@ -52,9 +52,9 @@ export const EventCard = ({
   const badgeClass = typeClasses[eventType] ?? typeClasses.Other;
 
   return (
-    <div className="bg-white rounded-lg border border-emerald-200 shadow-sm overflow-hidden transition-all hover:shadow-md hover:border-emerald-300 h-full flex flex-col">
+    <div className="bg-card rounded-lg border border-border shadow-sm overflow-hidden transition-all hover:shadow-md hover:border-border/50 h-full flex flex-col">
       {/* Thumbnail */}
-      <div className="h-44 w-full bg-emerald-50 border-b border-emerald-200 relative">
+      <div className="h-44 w-full bg-muted border-b border-border relative">
         {thumbnailUrl ? (
           <Link
             href={`/events/${id}`}
@@ -68,7 +68,7 @@ export const EventCard = ({
             />
           </Link>
         ) : (
-          <div className="flex items-center justify-center h-full text-emerald-400 text-sm">
+          <div className="flex items-center justify-center h-full text-muted-foreground text-sm">
             No image
           </div>
         )}
@@ -83,20 +83,20 @@ export const EventCard = ({
 
       {/* Card body */}
       <div className="p-4 flex-1 flex flex-col">
-        <h3 className="font-medium text-[#1F2937] line-clamp-2 mb-2">
+        <h3 className="font-medium text-foreground line-clamp-2 mb-2">
             <Link
               href={`/events/${id}`}
-              className="hover:text-emerald-600 transition-colors"
+              className="hover:text-primary transition-colors"
             >
               {title}
             </Link>
           </h3>
 
-        <p className="text-sm text-[#64748B] mb-3 line-clamp-1">
+        <p className="text-sm text-muted-foreground mb-3 line-clamp-1">
           {location || "Location to be announced"}
         </p>
 
-        <div className="flex items-center gap-2 text-xs text-[#989898] mt-auto">
+        <div className="flex items-center gap-2 text-xs text-muted-foreground mt-auto">
           <CalendarDays className="w-3 h-3" />
           <span>{formatDate(eventDate)}</span>
         </div>
@@ -104,12 +104,12 @@ export const EventCard = ({
 
       {/* Action footer (on Manage Events page) */}
       {onViewDetails || onEdit || onDelete ? (
-        <div className="p-4 border-t border-emerald-100">
+        <div className="p-4 border-t border-border">
           <div className="flex gap-2">
             {onViewDetails && (
               <Link
                 href={`/events/${id}`}
-                className="flex-1 rounded-lg bg-gradient-to-r from-emerald-500 to-emerald-600 px-4 py-2 text-sm font-medium text-white hover:from-emerald-600 hover:to-emerald-700 transition-all duration-200 shadow-sm hover:shadow-md flex items-center justify-center gap-1.5"
+                className="flex-1 rounded-lg bg-gradient-to-r from-primary to-primary/90 px-4 py-2 text-sm font-medium text-primary-foreground hover:bg-primary/90 transition-all duration-200 shadow-sm hover:shadow-md flex items-center justify-center gap-1.5"
               >
                 <Eye className="w-4 h-4" />View Details
               </Link>
@@ -118,7 +118,7 @@ export const EventCard = ({
             {onEdit && (
               <button
                 onClick={onEdit}
-                className="flex-1 rounded-lg bg-white px-4 py-2 text-sm font-medium text-emerald-600 border-2 border-emerald-300 hover:bg-emerald-50 hover:border-emerald-400 hover:shadow-sm transition-all duration-200 flex items-center justify-center gap-1.5"
+                className="flex-1 rounded-lg bg-card px-4 py-2 text-sm font-medium text-primary border-2 border-border hover:bg-primary/10 hover:border-primary hover:shadow-sm transition-all duration-200 flex items-center justify-center gap-1.5"
               >
                 <Edit className="w-4 h-4" />Edit
               </button>

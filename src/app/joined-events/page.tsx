@@ -141,11 +141,11 @@ export default function JoinedEventsPage() {
             </div>
           ) : (
             <div className="col-span-full py-8 text-center">
-              <p className="text-[#64748B] text-sm">
+              <p className="text-muted-foreground text-sm">
                 You haven&apos;t joined any events yet.{" "}
                 <Link
                   href="/events"
-                  className="text-emerald-600 hover:text-emerald-400 transition-colors"
+                  className="text-primary hover:text-primary/80 transition-colors"
                 >
                   Browse upcoming events
                 </Link>{" "}

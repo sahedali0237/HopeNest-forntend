@@ -2,14 +2,14 @@
 
 export const LoadingSkeleton = () => {
   return (
-    <div className="animate-pulse bg-yellow-50 rounded-lg h-full w-full">
+    <div className="animate-pulse bg-muted rounded-lg h-full w-full">
       {/* Skeleton pattern for event cards */}
-      <div className="h-48 rounded-t-lg border-emerald-100" />
+      <div className="h-48 rounded-t-lg border-border" />
       <div className="p-4">
-        <div className="h-6 rounded mb-3" />
-        <div className="h-4 rounded mb-2" />
-        <div className="h-4 rounded" />
-        <div className="h-6 rounded" />
+        <div className="h-6 rounded bg-muted" />
+        <div className="h-4 rounded bg-muted" />
+        <div className="h-4 rounded bg-muted" />
+        <div className="h-6 rounded bg-muted" />
       </div>
     </div>
   );

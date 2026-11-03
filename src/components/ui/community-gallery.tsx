@@ -24,12 +24,12 @@ const GALLERY_IMAGES = [
 
 export default function CommunityGallery() {
   return (
-    <section className="bg-[#F5F5F0]">
+    <section className="bg-muted/50">
       <div className="mx-auto max-w-7xl px-4 py-14 md:px-6 lg:px-8 lg:py-16">
         {/* Section header */}
         <div className="mb-8 flex items-end justify-between">
           <div>
-            <h2 className="pb-1 text-2xl font-bold text-[#0b3b2e] sm:text-3xl">
+            <h2 className="pb-1 text-2xl font-bold text-foreground sm:text-3xl">
               Community Gallery
             </h2>
             <span className="block h-1 w-24 rounded-full bg-emerald-600" />
@@ -69,7 +69,7 @@ export default function CommunityGallery() {
         </div>
 
         {/* Newsletter callout */}
-        <div className="relative mt-12 overflow-visible rounded-2xl border border-emerald-100 bg-white px-6 py-10 shadow-sm sm:px-10 lg:mt-16">
+        <div className="relative mt-12 overflow-visible rounded-2xl border border-border bg-card px-6 py-10 shadow-sm sm:px-10 lg:mt-16">
           {/* Decorative leaves */}
           <Leaf
             size={44}
@@ -107,10 +107,10 @@ export default function CommunityGallery() {
               </span>
 
               <div>
-                <h3 className="text-xl font-bold text-[#0b3b2e] sm:text-2xl">
+                <h3 className="text-xl font-bold text-foreground sm:text-2xl">
                   Stay Updated
                 </h3>
-                <p className="mt-1.5 text-sm text-stone-500 sm:text-base">
+                <p className="mt-1.5 text-sm text-muted-foreground sm:text-base">
                   Get the latest events, stories, and opportunities delivered to
                   your inbox.
                 </p>
@@ -137,7 +137,7 @@ export default function CommunityGallery() {
                   required
                   placeholder="Enter your email address"
                   aria-label="Enter your email address"
-                  className="w-full min-w-0 rounded-lg border border-stone-200 bg-white py-3 pl-10 pr-3 text-sm text-stone-800 shadow-sm outline-none transition-all placeholder:text-stone-400 focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20"
+                  className="w-full min-w-0 rounded-lg border border-border bg-card py-3 pl-10 pr-3 text-sm text-foreground shadow-sm outline-none transition-all placeholder:text-muted-foreground focus:border-primary focus:ring-2 focus:ring-primary/20"
                 />
               </div>
               <button

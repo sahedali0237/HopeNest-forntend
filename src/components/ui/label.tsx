@@ -4,7 +4,7 @@ export const Label = ({
   className,
   ...props
 }: React.LabelHTMLAttributes<HTMLLabelElement>) => {
-  return <label className={cn("block text-sm font-medium text-slate-700 dark:text-slate-300", className)} {...props} />;
+  return <label className={cn("block text-sm font-medium text-foreground dark:text-muted-foreground", className)} {...props} />;
 };
 
 export default Label;

@@ -32,9 +32,9 @@ export const Select = React.forwardRef(function Select(
     <div
       ref={mountedRef}
       className={cn(
-        "relative flex h-10 w-full items-center rounded-md border border-emerald-200 bg-yellow-50 px-3 py-2 text-stone-900 placeholder-stone-400 focus:ring-2 focus:ring-emerald-400 outline-none transition focus-within:outline-none",
+        "relative flex h-10 w-full items-center rounded-md border border-border bg-muted px-3 py-2 text-foreground placeholder-muted-foreground focus:ring-2 focus:ring-primary outline-none transition focus-within:outline-none",
         className,
-        "focus-within:border-emerald-400"
+        "focus-within:border-primary"
       )}
       {...propsRest}
     >
@@ -75,7 +75,7 @@ export const SelectTrigger = React.forwardRef(function SelectTrigger(
       aria-expanded="false"
       aria-haspopup="listbox"
       className={cn(
-        "flex h-10 w-full items-center justify-between rounded-md bg-transparent px-3 py-2 text-stone-900 outline-none focus:ring-2 focus:ring-emerald-400 disabled:opacity-50 disabled:pointer-events-none",
+        "flex h-10 w-full items-center justify-between rounded-md bg-transparent px-3 py-2 text-foreground outline-none focus:ring-2 focus:ring-primary disabled:opacity-50 disabled:pointer-events-none",
         className
       )}
       {...propsRest}
@@ -106,8 +106,8 @@ export const SelectValue = React.forwardRef(function SelectValue(
     <span
       ref={mountedRef}
       className={cn(
-        "pointer-events-none flex flex-1 items-center text-sm text-stone-900",
-        placeholder && "text-stone-400",
+        "pointer-events-none flex flex-1 items-center text-sm text-foreground",
+        placeholder && "text-muted-foreground",
         className
       )}
       {...propsRest}
@@ -138,7 +138,7 @@ export const SelectContent = React.forwardRef(function SelectContent(
     <div
       ref={mountedRef}
       className={cn(
-        "relative z-50 max-h-96 min-w-[8rem] overflow-hidden rounded-md border border-emerald-200 bg-white text-stone-900 shadow-md",
+        "relative z-50 max-h-96 min-w-[8rem] overflow-hidden rounded-md border border-border bg-card text-foreground shadow-md",
         className
       )}
       {...propsRest}
@@ -176,7 +176,7 @@ export const SelectItem = React.forwardRef(function SelectItem(
       /* @ts-expect-error - value prop is required by Radix SelectItem but not in HTML div props */
       value={value as string}
       className={cn(
-        "relative flex cursor-default select-none items-center rounded-sm py-1.5 pl-8 pr-2 text-sm outline-none focus:bg-emerald-50 focus:text-emerald-900 data-[disabled]:pointer-events-none data-[disabled]:opacity-50",
+        "relative flex cursor-default select-none items-center rounded-sm py-1.5 pl-8 pr-2 text-sm outline-none focus:bg-primary/10 focus:text-primary data-[disabled]:pointer-events-none data-[disabled]:opacity-50",
         className
       )}
       {...propsRest as React.ComponentPropsWithoutRef<"div">}

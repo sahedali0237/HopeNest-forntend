@@ -72,6 +72,61 @@ HopeNest/
 └── backend/    # Express.js API
 ```
 
+🗺️ Pages & Routes
+Route Access Description
+/ Public Hero banner, features,
+recent events (up to
+6), gallery, and
+newsletter
+
+/events Public Browse upcoming events
+
+/events/:id Public View event details;
+joining requires login
+
+/login Public Email/password and
+social login
+
+/register Public Create an account
+
+/create-event Private Create a new event
+
+/manage-events Private Update or delete events
+you created
+/joined-events Private View events you have
+joined
+🔌 API Overview
+The following table describes the intended API operations. Confirm the
+endpoint names and HTTP methods against the deployed backend if you
+change the server implementation.
+Method Endpoint Auth Description
+GET /events No Get upcoming
+events
+
+GET /events?limit=6 No Get up to six
+events for the
+homepage
+
+GET /events/:id No Get a single
+event
+
+POST /events JWT Create an event
+
+GET /my-events JWT Get events
+created by the
+logged-in user
+
+PUT / PATCH /events/:id JWT Update an event
+(owner only)
+
+DELETE /events/:id JWT Delete an event
+(owner only)
+
+POST /join/:id JWT Join an event
+GET /joined-events JWT Get events joined
+by the logged-in
+user
+
 ## Getting Started
 
 ### 1. Clone the repositories

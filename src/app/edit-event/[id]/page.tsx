@@ -83,7 +83,7 @@ export default function EditEventPage({ params }: { params: Promise<{ id: string
     return (
       <DashboardLayout sidebarTitle="Edit Event">
         <div className="pt-6 max-w-2xl mx-auto">
-          <div className="animate-pulse bg-slate-200 dark:bg-slate-800 rounded-xl h-96" />
+          <div className="animate-pulse bg-muted rounded-xl h-96" />
         </div>
       </DashboardLayout>
     );
@@ -97,13 +97,13 @@ export default function EditEventPage({ params }: { params: Promise<{ id: string
     return (
       <DashboardLayout sidebarTitle="Edit Event" user={user}>
         <div className="pt-6 max-w-2xl mx-auto">
-          <div className="bg-red-50 border border-red-200 rounded-lg p-6 text-center">
-            <h2 className="text-xl font-bold text-red-900 mb-2">
+          <div className="bg-destructive/10 border border-destructive/20 rounded-lg p-6 text-center">
+            <h2 className="text-xl font-bold text-destructive mb-2">
               {error}
             </h2>
             <button
               onClick={() => router.push("/manage-events")}
-              className="mt-4 rounded-md bg-emerald-600 px-4 py-2 text-sm font-medium text-white hover:bg-emerald-500 transition-all"
+              className="mt-4 rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:bg-primary/90 transition-all"
             >
               Back to Manage Events
             </button>
@@ -120,7 +120,7 @@ export default function EditEventPage({ params }: { params: Promise<{ id: string
   return (
     <DashboardLayout sidebarTitle="Edit Event" user={user}>
       <div className="pt-6">
-        <h1 className="text-2xl font-bold text-[#062D25] mb-6">
+        <h1 className="text-2xl font-bold text-foreground mb-6">
           Edit Event
         </h1>
 

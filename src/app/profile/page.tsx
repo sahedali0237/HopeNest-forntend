@@ -108,10 +108,10 @@ export default function ProfilePage() {
       <DashboardLayout sidebarTitle="Profile">
         <main className="p-6 md:p-10">
           <div className="max-w-4xl mx-auto space-y-6">
-            <div className="animate-pulse bg-emerald-950/10 rounded-2xl h-64 w-full" />
+            <div className="animate-pulse bg-muted rounded-2xl h-64 w-full" />
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              <div className="animate-pulse bg-emerald-950/10 rounded-2xl h-56" />
-              <div className="animate-pulse bg-emerald-950/10 rounded-2xl h-56 md:col-span-2" />
+              <div className="animate-pulse bg-muted rounded-2xl h-56" />
+              <div className="animate-pulse bg-muted rounded-2xl h-56 md:col-span-2" />
             </div>
           </div>
         </main>
@@ -133,7 +133,7 @@ export default function ProfilePage() {
     <DashboardLayout sidebarTitle="Profile" user={sessionUser}>
       <main className="py-8 px-4 sm:px-6 lg:px-8">
         <div className="max-w-4xl mx-auto space-y-6">
-          <div className="overflow-hidden rounded-2xl border border-emerald-900/10 bg-white shadow-sm">
+          <div className="overflow-hidden rounded-2xl border border-border bg-card shadow-sm">
             <div className="relative h-36 sm:h-44 w-full bg-linear-to-r from-[#04241D] via-[#063B2F] to-emerald-700">
               <div className="absolute inset-0 opacity-15 bg-[radial-gradient(#ffffff_1px,transparent_1px)] bg-size-[16px_16px]" />
               <div className="absolute top-4 right-4 inline-flex items-center gap-1.5 rounded-full bg-white/10 px-3 py-1 text-xs font-medium text-emerald-100 backdrop-blur-md border border-white/15">
@@ -163,7 +163,7 @@ export default function ProfilePage() {
 
                   <div className="pt-1 sm:pb-1">
                     <div className="flex items-center gap-2 flex-wrap">
-                      <h1 className="text-2xl sm:text-3xl font-bold text-[#062D25]">
+                      <h1 className="text-2xl sm:text-3xl font-bold text-foreground">
                         {displayName}
                       </h1>
                       <span className="inline-flex items-center gap-1 rounded-full bg-emerald-50 px-2.5 py-0.5 text-xs font-semibold text-emerald-700 border border-emerald-200">
@@ -171,8 +171,8 @@ export default function ProfilePage() {
                         Volunteer
                       </span>
                     </div>
-                    <p className="text-sm text-slate-500 flex items-center gap-1.5 mt-1">
-                      <Mail className="h-3.5 w-3.5 text-emerald-600" />
+                    <p className="text-sm text-muted-foreground flex items-center gap-1.5 mt-1">
+                      <Mail className="h-3.5 w-3.5 text-primary" />
                       {displayEmail}
                     </p>
                   </div>
@@ -200,7 +200,7 @@ export default function ProfilePage() {
                         }));
                         setIsEditing(false);
                       }}
-                      className="inline-flex items-center gap-1.5 rounded-xl border-slate-200 px-4 py-2 text-sm font-medium text-slate-600 hover:bg-slate-50 cursor-pointer"
+                      className="inline-flex items-center gap-1.5 rounded-xl border-border px-4 py-2 text-sm font-medium text-muted-foreground hover:bg-muted cursor-pointer"
                     >
                       <X className="h-4 w-4" />
                       Cancel Editing
@@ -215,8 +215,8 @@ export default function ProfilePage() {
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
             {/* Left Column: Account Status & Quick Shortcuts */}
             <div className="space-y-6">
-              <div className="rounded-2xl border border-emerald-900/10 bg-white p-6 shadow-sm">
-                <h2 className="text-xs font-bold uppercase tracking-wider text-slate-400 mb-4">
+              <div className="rounded-2xl border border-border bg-card p-6 shadow-sm">
+                <h2 className="text-xs font-bold uppercase tracking-wider text-muted-foreground mb-4">
                   Account Status
                 </h2>
 
@@ -226,40 +226,40 @@ export default function ProfilePage() {
                       <ShieldCheck className="h-5 w-5" />
                     </div>
                     <div>
-                      <p className="text-sm font-semibold text-[#062D25]">
+                      <p className="text-sm font-semibold text-foreground">
                         Active Member
                       </p>
-                      <p className="text-xs text-slate-500">
+                      <p className="text-xs text-muted-foreground">
                         Can create and join social development events
                       </p>
                     </div>
                   </div>
 
                   <div className="border-t border-slate-100 pt-4 space-y-2">
-                    <p className="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2">
+                    <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-2">
                       Quick Links
                     </p>
                     <Link
                       href="/joined-events"
-                      className="flex items-center justify-between rounded-xl px-3 py-2 text-sm font-medium text-slate-700 hover:bg-emerald-50 hover:text-emerald-700 transition-colors"
+                      className="flex items-center justify-between rounded-xl px-3 py-2 text-sm font-medium text-foreground hover:bg-muted hover:text-primary transition-colors"
                     >
                       <span className="flex items-center gap-2">
-                        <Heart className="h-4 w-4 text-emerald-600" />
+                        <Heart className="h-4 w-4 text-primary" />
                         Joined Events
                       </span>
-                      <span className="text-xs text-emerald-600 font-semibold">
+                      <span className="text-xs text-primary font-semibold">
                         View &rarr;
                       </span>
                     </Link>
                     <Link
                       href="/manage-events"
-                      className="flex items-center justify-between rounded-xl px-3 py-2 text-sm font-medium text-slate-700 hover:bg-emerald-50 hover:text-emerald-700 transition-colors"
+                      className="flex items-center justify-between rounded-xl px-3 py-2 text-sm font-medium text-foreground hover:bg-muted hover:text-primary transition-colors"
                     >
                       <span className="flex items-center gap-2">
-                        <Calendar className="h-4 w-4 text-emerald-600" />
+                        <Calendar className="h-4 w-4 text-primary" />
                         Manage Events
                       </span>
-                      <span className="text-xs text-emerald-600 font-semibold">
+                      <span className="text-xs text-primary font-semibold">
                         View &rarr;
                       </span>
                     </Link>
@@ -274,10 +274,10 @@ export default function ProfilePage() {
                 /* Edit Mode Card */
                 <div className="rounded-2xl border border-emerald-900/10 bg-white p-6 sm:p-8 shadow-sm">
                   <div className="mb-6 border-b border-slate-100 pb-4">
-                    <h2 className="text-xl font-bold text-[#062D25]">
+                    <h2 className="text-xl font-bold text-foreground">
                       Update Profile Information
                     </h2>
-                    <p className="text-xs text-slate-500 mt-1">
+                    <p className="text-xs text-muted-foreground mt-1">
                       Changes to your name and avatar will appear across all
                       events you organize or join.
                     </p>
@@ -291,8 +291,8 @@ export default function ProfilePage() {
                     className="space-y-5"
                   >
                     <div>
-                      <label className="flex items-center gap-2 text-sm font-semibold text-[#062D25] mb-2">
-                        <User className="h-4 w-4 text-emerald-600" />
+                      <label className="flex items-center gap-2 text-sm font-semibold text-foreground mb-2">
+                        <User className="h-4 w-4 text-primary" />
                         Full Name
                       </label>
                       <Input
@@ -302,13 +302,13 @@ export default function ProfilePage() {
                         }
                         placeholder="Enter your full name"
                         disabled={isSaving}
-                        className="rounded-xl border-slate-200 bg-slate-50/70 px-4 py-2.5 text-slate-900 focus:border-emerald-500 focus:bg-white focus:ring-2 focus:ring-emerald-500/20 transition w-full"
+                        className="rounded-xl border-border bg-muted px-4 py-2.5 text-foreground focus:border-primary focus:bg-card focus:ring-2 focus:ring-primary/20 transition w-full"
                       />
                     </div>
 
                     <div>
-                      <label className="flex items-center gap-2 text-sm font-semibold text-[#062D25] mb-2">
-                        <Camera className="h-4 w-4 text-emerald-600" />
+                      <label className="flex items-center gap-2 text-sm font-semibold text-foreground mb-2">
+                        <Camera className="h-4 w-4 text-primary" />
                         Profile Photo URL
                       </label>
                       <Input
@@ -322,16 +322,16 @@ export default function ProfilePage() {
                         }
                         placeholder="https://images.unsplash.com/..."
                         disabled={isSaving}
-                        className="rounded-xl border-slate-200 bg-slate-50/70 px-4 py-2.5 text-slate-900 focus:border-emerald-500 focus:bg-white focus:ring-2 focus:ring-emerald-500/20 transition w-full"
+                        className="rounded-xl border-border bg-muted px-4 py-2.5 text-foreground focus:border-primary focus:bg-card focus:ring-2 focus:ring-primary/20 transition w-full"
                       />
-                      <p className="mt-1.5 text-xs text-slate-400">
+                      <p className="mt-1.5 text-xs text-muted-foreground">
                         Paste a direct image link (HTTPS) to update your avatar.
                       </p>
                     </div>
 
                     <div>
-                      <label className="flex items-center gap-2 text-sm font-semibold text-[#062D25] mb-2">
-                        <FileText className="h-4 w-4 text-emerald-600" />
+                      <label className="flex items-center gap-2 text-sm font-semibold text-foreground mb-2">
+                        <FileText className="h-4 w-4 text-primary" />
                         Volunteer Bio
                       </label>
                       <textarea
@@ -343,26 +343,26 @@ export default function ProfilePage() {
                         placeholder="Tell the community about your environmental and social interests..."
                         disabled={isSaving}
                         className={cn(
-                          "rounded-xl border border-slate-200 bg-slate-50/70 px-4 py-3 text-sm text-slate-900 focus:border-emerald-500 focus:bg-white focus:ring-2 focus:ring-emerald-500/20 outline-none transition w-full resize-none",
+                          "rounded-xl border border-border bg-muted px-4 py-3 text-sm text-foreground focus:border-primary focus:bg-card focus:ring-2 focus:ring-primary/20 outline-none transition w-full resize-none",
                           isSaving && "cursor-not-allowed opacity-50",
                         )}
                       />
                     </div>
 
-                    <div className="flex items-center justify-end gap-3 pt-4 border-t border-slate-100">
+                    <div className="flex items-center justify-end gap-3 pt-4 border-t border-border">
                       <Button
                         type="button"
                         variant="outline"
                         disabled={isSaving}
                         onClick={() => setIsEditing(false)}
-                        className="rounded-xl border-slate-200 px-5 py-2.5 text-sm font-medium text-slate-600 hover:bg-slate-50"
+                        className="rounded-xl border-border px-5 py-2.5 text-sm font-medium text-muted-foreground hover:bg-muted"
                       >
                         Cancel
                       </Button>
                       <Button
                         type="submit"
                         disabled={isSaving}
-                        className="inline-flex items-center gap-2 rounded-xl bg-emerald-600 px-6 py-2.5 text-sm font-semibold text-white shadow-xs hover:bg-emerald-700 disabled:opacity-50"
+                        className="inline-flex items-center gap-2 rounded-xl bg-primary px-6 py-2.5 text-sm font-semibold text-primary-foreground shadow-xs hover:bg-primary/90 disabled:opacity-50"
                       >
                         <Save className="h-4 w-4" />
                         {isSaving ? "Saving Changes..." : "Save Changes"}
@@ -372,45 +372,45 @@ export default function ProfilePage() {
                 </div>
               ) : (
                 /* View Mode Card */
-                <div className="rounded-2xl border border-emerald-900/10 bg-white p-6 sm:p-8 shadow-sm space-y-6">
-                  <div className="border-b border-slate-100 pb-4">
-                    <h2 className="text-lg font-bold text-[#062D25]">
+                <div className="rounded-2xl border border-border bg-card p-6 sm:p-8 shadow-sm space-y-6">
+                  <div className="border-b border-border pb-4">
+                    <h2 className="text-lg font-bold text-foreground">
                       Personal Information
                     </h2>
-                    <p className="text-xs text-slate-500 mt-0.5">
+                    <p className="text-xs text-muted-foreground mt-0.5">
                       Your public volunteer profile details on HopeNest
                     </p>
                   </div>
 
                   {/* Bio Section */}
-                  <div className="rounded-xl bg-[#FBF9F1] border border-emerald-900/10 p-4">
-                    <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-emerald-700 mb-1.5">
+                  <div className="rounded-xl bg-accent/50 border border-border p-4">
+                    <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-primary mb-1.5">
                       <FileText className="h-3.5 w-3.5" />
                       About / Bio
                     </div>
-                    <p className="text-sm leading-relaxed text-slate-700">
+                    <p className="text-sm leading-relaxed text-foreground">
                       {displayBio}
                     </p>
                   </div>
 
                   {/* Structured Info Rows */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div className="rounded-xl border border-slate-100 bg-slate-50/60 p-4">
-                      <span className="flex items-center gap-1.5 text-xs font-medium text-slate-400">
-                        <User className="h-3.5 w-3.5 text-emerald-600" />
+                    <div className="rounded-xl border border-border bg-muted/50 p-4">
+                      <span className="flex items-center gap-1.5 text-xs font-medium text-muted-foreground">
+                        <User className="h-3.5 w-3.5 text-primary" />
                         Full Name
                       </span>
-                      <p className="mt-1 text-base font-semibold text-[#062D25]">
+                      <p className="mt-1 text-base font-semibold text-foreground">
                         {displayName}
                       </p>
                     </div>
 
-                    <div className="rounded-xl border border-slate-100 bg-slate-50/60 p-4">
-                      <span className="flex items-center gap-1.5 text-xs font-medium text-slate-400">
-                        <Mail className="h-3.5 w-3.5 text-emerald-600" />
+                    <div className="rounded-xl border border-border bg-muted/50 p-4">
+                      <span className="flex items-center gap-1.5 text-xs font-medium text-muted-foreground">
+                        <Mail className="h-3.5 w-3.5 text-primary" />
                         Email Address
                       </span>
-                      <p className="mt-1 text-base font-semibold text-[#062D25] break-all">
+                      <p className="mt-1 text-base font-semibold text-foreground break-all">
                         {displayEmail}
                       </p>
                     </div>

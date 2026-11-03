@@ -97,30 +97,30 @@ export default function SignUpPage() {
 
   const inputClass = (hasError: boolean) =>
     cn(
-      "h-11 rounded-lg bg-white border-slate-200 focus-visible:ring-emerald-500",
+      "h-11 rounded-lg bg-card border-border focus-visible:ring-primary",
       hasError && "border-red-500 focus-visible:ring-red-500",
     );
 
   return (
-    <main className="min-h-screen bg-yellow-50 flex items-center justify-center px-4 py-10 sm:px-6">
+    <main className="min-h-screen bg-muted/50 flex items-center justify-center px-4 py-10 sm:px-6">
       <div className="w-full max-w-md">
         {/* Brand Header */}
         <div className="text-center mb-8">
-          <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-emerald-100 text-emerald-700 mb-4">
+          <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-primary/10 text-primary mb-4">
             <Layers3 size={28} strokeWidth={2} />
           </div>
 
-          <h1 className="text-3xl font-bold tracking-tight text-slate-900">
+          <h1 className="text-3xl font-bold tracking-tight text-foreground">
             Create Your Account
           </h1>
 
-          <p className="text-slate-500 mt-2 text-sm">
+          <p className="text-muted-foreground mt-2 text-sm">
             Join HopeNest and start making a difference.
           </p>
         </div>
 
         {/* Sign Up Card */}
-        <div className="bg-white border border-yellow-100 shadow-xl shadow-yellow-900/5 rounded-2xl p-6 sm:p-8">
+        <div className="bg-card border border-border shadow-xl shadow-primary/5 rounded-2xl p-6 sm:p-8">
           <form
             onSubmit={handleSubmit(handleCreateAccount)}
             className="space-y-4"
@@ -130,7 +130,7 @@ export default function SignUpPage() {
             <div>
               <label
                 htmlFor="fullName"
-                className="block text-sm font-semibold text-slate-700 mb-2"
+                className="block text-sm font-semibold text-foreground mb-2"
               >
                 Full Name
               </label>
@@ -163,7 +163,7 @@ export default function SignUpPage() {
             <div>
               <label
                 htmlFor="email"
-                className="block text-sm font-semibold text-slate-700 mb-2"
+                className="block text-sm font-semibold text-foreground mb-2"
               >
                 Email Address
               </label>
@@ -196,7 +196,7 @@ export default function SignUpPage() {
             <div>
               <label
                 htmlFor="photoUrl"
-                className="block text-sm font-semibold text-slate-700 mb-2"
+                className="block text-sm font-semibold text-foreground mb-2"
               >
                 Profile Photo URL
               </label>
@@ -228,7 +228,7 @@ export default function SignUpPage() {
             <div>
               <label
                 htmlFor="password"
-                className="block text-sm font-semibold text-slate-700 mb-2"
+                className="block text-sm font-semibold text-foreground mb-2"
               >
                 Password
               </label>
@@ -262,7 +262,7 @@ export default function SignUpPage() {
                   disabled={isLoading}
                   aria-label={showPassword ? "Hide password" : "Show password"}
                   aria-pressed={showPassword}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-emerald-600 transition-colors"
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-primary transition-colors"
                 >
                   {showPassword ? <EyeOff size={19} /> : <Eye size={19} />}
                 </button>
@@ -276,7 +276,7 @@ export default function SignUpPage() {
                       key={rule.label}
                       className={cn(
                         "flex items-center gap-1 text-[10px] sm:text-xs",
-                        rule.valid ? "text-emerald-600" : "text-slate-400",
+                        rule.valid ? "text-primary" : "text-muted-foreground",
                       )}
                     >
                       <Check
@@ -300,7 +300,7 @@ export default function SignUpPage() {
             <div>
               <label
                 htmlFor="confirmPassword"
-                className="block text-sm font-semibold text-slate-700 mb-2"
+                className="block text-sm font-semibold text-foreground mb-2"
               >
                 Confirm Password
               </label>
@@ -328,7 +328,7 @@ export default function SignUpPage() {
                   aria-label={
                     showConfirmPassword ? "Hide password" : "Show password"
                   }
-                  className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-emerald-600 transition-colors"
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-primary transition-colors"
                 >
                   {showConfirmPassword ? (
                     <EyeOff size={19} />
@@ -366,24 +366,24 @@ export default function SignUpPage() {
 
             {/* Divider */}
             <div className="flex items-center gap-4 py-1">
-              <div className="flex-1 h-px bg-slate-200" />
+              <div className="flex-1 h-px bg-border" />
 
-              <span className="text-xs font-medium text-slate-400 whitespace-nowrap">
+              <span className="text-xs font-medium text-muted-foreground whitespace-nowrap">
                 OR CONTINUE WITH
               </span>
 
-              <div className="flex-1 h-px bg-slate-200" />
+              <div className="flex-1 h-px bg-border" />
             </div>
 
             {/* Social Login */}
             <SocialLogIn />
 
             {/* Sign In Link */}
-            <p className="text-center text-sm text-slate-500 pt-2">
+            <p className="text-center text-sm text-muted-foreground pt-2">
               Already have an account?{" "}
               <Link
                 href="/signIn"
-                className="font-semibold text-emerald-600 hover:text-emerald-700 hover:underline transition-colors"
+                className="font-semibold text-primary hover:text-primary/80 hover:underline transition-colors"
               >
                 Sign in
               </Link>
@@ -392,7 +392,7 @@ export default function SignUpPage() {
         </div>
 
         {/* Footer */}
-        <p className="text-center text-xs text-slate-400 mt-6">
+        <p className="text-center text-xs text-muted-foreground mt-6">
           Together, we can make a difference.
         </p>
       </div>

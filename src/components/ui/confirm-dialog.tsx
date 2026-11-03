@@ -38,24 +38,24 @@ export const ConfirmDialog = ({
       className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm"
     >
       <div
-        className="bg-white rounded-lg border p-6 sm:p-8 shadow-xl max-w-sm w-full transform scale-90 origin-center transition-all duration-200"
+        className="bg-card rounded-lg border border-border p-6 sm:p-8 shadow-xl max-w-sm w-full transform scale-90 origin-center transition-all duration-200"
         style={{
           transform: open ? "scale(1)" : "scale(0.95)",
         }}
       >
-        <h3 className="text-lg font-medium text-[#1F2937] mb-4">{title}</h3>
-        <p className="text-[#64748B] mb-6">{text}</p>
+        <h3 className="text-lg font-medium text-foreground mb-4">{title}</h3>
+        <p className="text-muted-foreground mb-6">{text}</p>
 
         <div className="flex justify-end gap-3">
           <button
             onClick={handleCancel}
-            className="rounded-md px-4 py-2 text-sm font-medium text-emerald-600 hover:bg-emerald-50 transition-all"
+            className="rounded-md px-4 py-2 text-sm font-medium text-primary hover:bg-primary/10 transition-all"
           >
             {cancelText}
           </button>
           <button
             onClick={handleConfirm}
-            className="rounded-md px-4 py-2 text-sm font-medium text-white transition hover:bg-emerald-500 disabled:opacity-50"
+            className="rounded-md px-4 py-2 text-sm font-medium text-white transition bg-primary hover:bg-primary/90 disabled:opacity-50"
           >
             {confirmText}
           </button>

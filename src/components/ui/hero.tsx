@@ -29,7 +29,7 @@ const Hero = ({ locations }: Props) => {
   };
 
   const selectClass =
-    "w-full appearance-none rounded-lg border border-slate-200 bg-slate-50 py-2.5 pl-4 pr-9 text-sm font-medium text-slate-700 outline-none transition-colors hover:border-emerald-400 focus:border-emerald-500 focus:bg-white";
+    "w-full appearance-none rounded-lg border border-border bg-muted py-2.5 pl-4 pr-9 text-sm font-medium text-foreground outline-none transition-colors hover:border-primary focus:border-primary focus:bg-card";
 
   return (
     <section className="relative overflow-hidden">
@@ -43,17 +43,17 @@ const Hero = ({ locations }: Props) => {
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-8 items-center">
           {/* Left: Copy + Search & Filter */}
           <div className="max-w-xl">
-            <h1 className="text-4xl sm:text-5xl xl:text-6xl font-extrabold tracking-tight text-[#0b3b2e] leading-tight">
+            <h1 className="text-4xl sm:text-5xl xl:text-6xl font-extrabold tracking-tight text-foreground leading-tight">
               Empower Your Community, Create Lasting Change
             </h1>
 
-            <p className="mt-5 text-base sm:text-lg text-slate-600 leading-relaxed">
+            <p className="mt-5 text-base sm:text-lg text-muted-foreground leading-relaxed">
               Cheerful volunteers empowering the community — site cleanups,
               donation drives and planting saplings in the field.
             </p>
 
-            <div className="mt-8 rounded-2xl bg-white p-5 sm:p-6 shadow-xl shadow-emerald-900/10 ring-1 ring-black/5">
-              <p className="text-sm font-bold text-[#0b3b2e]">
+            <div className="mt-8 rounded-2xl bg-card p-5 sm:p-6 shadow-xl shadow-emerald-900/10 ring-1 ring-border">
+              <p className="text-sm font-bold text-foreground">
                 Search & Filter
               </p>
 

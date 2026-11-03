@@ -135,20 +135,20 @@ export const EventForm = ({
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="rounded-xl border border-stone-200 bg-white p-6 sm:p-8 shadow-sm max-w-2xl mx-auto"
+      className="rounded-xl border border-border bg-card p-6 sm:p-8 shadow-sm max-w-2xl mx-auto"
     >
       {/* Form Grid - 2 columns on sm+ */}
       <div className="grid gap-5 sm:grid-cols-2">
         {/* Event Title */}
         <div>
-          <label className="block text-sm font-medium text-[#1F2937] mb-1">
+          <label className="block text-sm font-medium text-foreground mb-1">
             Event Title
           </label>
           <Input
             {...register("title")}
             placeholder="Enter event title"
             className={cn(
-              "w-full h-11 rounded-md border border-emerald-200 bg-yellow-50 px-3 py-2.5 text-stone-900 placeholder-stone-400 focus:ring-2 focus:ring-emerald-400 outline-none transition",
+              "w-full h-11 rounded-md border border-border bg-muted px-3 py-2.5 text-foreground placeholder-muted-foreground focus:ring-2 focus:ring-primary outline-none transition",
               errors.title && "border-red-500 focus-visible:ring-red-500",
             )}
           />
@@ -159,15 +159,15 @@ export const EventForm = ({
 
         {/* Event Type */}
         <div>
-          <label className="block text-sm font-medium text-[#1F2937] mb-1">
+          <label className="block text-sm font-medium text-foreground mb-1">
             Event Type
           </label>
           <div className="relative">
             <select
               {...register("eventType")}
               className={cn(
-                "w-full h-11 appearance-none rounded-md border border-emerald-200 bg-yellow-50 px-3 pr-10 py-2.5 text-sm text-stone-900 focus:ring-2 focus:ring-emerald-400 outline-none transition",
-                !selectedEventType && "text-stone-400",
+                "w-full h-11 appearance-none rounded-md border border-border bg-muted px-3 pr-10 py-2.5 text-sm text-foreground focus:ring-2 focus:ring-primary outline-none transition",
+                !selectedEventType && "text-muted-foreground",
                 errors.eventType && "border-red-500 focus:ring-red-500",
               )}
             >
@@ -178,7 +178,7 @@ export const EventForm = ({
                 <option
                   key={type}
                   value={type}
-                  className="text-stone-900 bg-white"
+                  className="text-foreground bg-card"
                 >
                   {type}
                 </option>
@@ -195,7 +195,7 @@ export const EventForm = ({
 
         {/* Description */}
         <div className="sm:col-span-2">
-          <label className="block text-sm font-medium text-[#1F2937] mb-1">
+          <label className="block text-sm font-medium text-foreground mb-1">
             Description
           </label>
           <textarea
@@ -203,7 +203,7 @@ export const EventForm = ({
             rows={3}
             placeholder="Describe your event..."
             className={cn(
-              "rounded-md border border-emerald-200 bg-yellow-50 px-3 py-2.5 text-stone-900 placeholder-stone-400 focus:ring-2 focus:ring-emerald-400 outline-none transition w-full resize-none",
+              "rounded-md border border-border bg-muted px-3 py-2.5 text-foreground placeholder-muted-foreground focus:ring-2 focus:ring-primary outline-none transition w-full resize-none",
               errors.description && "border-red-500 focus-visible:ring-red-500",
             )}
           />
@@ -216,7 +216,7 @@ export const EventForm = ({
 
         {/* Thumbnail URL */}
         <div className="sm:col-span-2">
-          <label className="block text-sm font-medium text-[#1F2937] mb-1">
+          <label className="block text-sm font-medium text-foreground mb-1">
             Thumbnail Image URL
           </label>
           <Input
@@ -224,7 +224,7 @@ export const EventForm = ({
             {...register("thumbnailUrl")}
             placeholder="https://example.com/image.jpg"
             className={cn(
-              "w-full h-11 rounded-md border border-emerald-200 bg-yellow-50 px-3 py-2.5 text-stone-900 placeholder-stone-400 focus:ring-2 focus:ring-emerald-400 outline-none transition",
+              "w-full h-11 rounded-md border border-border bg-muted px-3 py-2.5 text-foreground placeholder-muted-foreground focus:ring-2 focus:ring-primary outline-none transition",
               errors.thumbnailUrl &&
                 "border-red-500 focus-visible:ring-red-500",
             )}
@@ -253,14 +253,14 @@ export const EventForm = ({
 
         {/* Location */}
         <div>
-          <label className="block text-sm font-medium text-[#1F2937] mb-1">
+          <label className="block text-sm font-medium text-foreground mb-1">
             Location
           </label>
           <Input
             {...register("location")}
             placeholder="Enter location"
             className={cn(
-              "w-full h-11 rounded-md border border-emerald-200 bg-yellow-50 px-3 py-2.5 text-stone-900 placeholder-stone-400 focus:ring-2 focus:ring-emerald-400 outline-none transition",
+              "w-full h-11 rounded-md border border-border bg-muted px-3 py-2.5 text-foreground placeholder-muted-foreground focus:ring-2 focus:ring-primary outline-none transition",
               errors.location && "border-red-500 focus-visible:ring-red-500",
             )}
           />
@@ -273,7 +273,7 @@ export const EventForm = ({
 
         {/* Event Date */}
         <div>
-          <label className="block text-sm font-medium text-[#1F2937] mb-1">
+          <label className="block text-sm font-medium text-foreground mb-1">
             Event Date
           </label>
           <Input
@@ -281,7 +281,7 @@ export const EventForm = ({
             min={today}
             {...register("eventDate")}
             className={cn(
-              "w-full h-11 rounded-md border border-emerald-200 bg-yellow-50 px-3 py-2.5 text-stone-900 placeholder-stone-400 focus:ring-2 focus:ring-emerald-400 outline-none transition",
+              "w-full h-11 rounded-md border border-border bg-muted px-3 py-2.5 text-foreground placeholder-muted-foreground focus:ring-2 focus:ring-primary outline-none transition",
               errors.eventDate && "border-red-500 focus-visible:ring-red-500",
             )}
           />
@@ -295,13 +295,13 @@ export const EventForm = ({
         {/* Creator Email (read-only) */}
         {initialData?.creatorEmail && (
           <div className="sm:col-span-2">
-            <label className="block text-sm font-medium text-[#1F2937] mb-1">
+            <label className="block text-sm font-medium text-foreground mb-1">
               Creator Email
             </label>
             <Input
               {...register("creatorEmail")}
               readOnly
-              className="w-full h-11 rounded-md border border-emerald-200 bg-yellow-50 px-3 py-2.5 text-stone-900 placeholder-stone-400 outline-none transition cursor-not-allowed"
+              className="w-full h-11 rounded-md border border-border bg-muted px-3 py-2.5 text-foreground placeholder-muted-foreground outline-none transition cursor-not-allowed"
             />
             <p className="mt-1 text-xs text-emerald-600/80">
               Automatically set to your account email

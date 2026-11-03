@@ -75,25 +75,25 @@ export default function SignInPage() {
   };
 
   return (
-    <main className="min-h-screen bg-yellow-50 flex items-center justify-center px-4 py-10 sm:px-6">
+    <main className="min-h-screen bg-muted/50 flex items-center justify-center px-4 py-10 sm:px-6">
       <div className="w-full max-w-md">
         {/* Brand Header */}
         <div className="text-center mb-8">
-          <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-emerald-100 text-emerald-700 mb-4">
+          <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-primary/10 text-primary mb-4">
             <Layers3 size={28} strokeWidth={2} />
           </div>
 
-          <h1 className="text-3xl font-bold tracking-tight text-slate-900">
+          <h1 className="text-3xl font-bold tracking-tight text-foreground">
             Welcome Back
           </h1>
 
-          <p className="text-slate-500 mt-2 text-sm">
+          <p className="text-muted-foreground mt-2 text-sm">
             Sign in to continue making a difference.
           </p>
         </div>
 
         {/* Sign In Card */}
-        <div className="bg-white border border-yellow-100 shadow-xl shadow-yellow-900/5 rounded-2xl p-6 sm:p-8">
+        <div className="bg-card border border-border shadow-xl shadow-primary/5 rounded-2xl p-6 sm:p-8">
           <form
             onSubmit={handleSubmit(onSubmit)}
             className="space-y-5"
@@ -103,7 +103,7 @@ export default function SignInPage() {
             <div>
               <label
                 htmlFor="email"
-                className="block text-sm font-semibold text-slate-700 mb-2"
+                className="block text-sm font-semibold text-foreground mb-2"
               >
                 Email Address
               </label>
@@ -123,7 +123,7 @@ export default function SignInPage() {
                   },
                 })}
                 className={cn(
-                  "h-11 rounded-lg bg-white border-slate-200 focus-visible:ring-emerald-500",
+                  "h-11 rounded-lg bg-card border-border focus-visible:ring-primary",
                   errors.email && "border-red-500 focus-visible:ring-red-500",
                 )}
               />
@@ -140,7 +140,7 @@ export default function SignInPage() {
               <div className="flex items-center justify-between mb-2">
                 <label
                   htmlFor="password"
-                  className="text-sm font-semibold text-slate-700"
+                  className="text-sm font-semibold text-foreground"
                 >
                   Password
                 </label>
@@ -162,7 +162,7 @@ export default function SignInPage() {
                     },
                   })}
                   className={cn(
-                    "h-11 rounded-lg pr-11 bg-white border-slate-200 focus-visible:ring-emerald-500",
+                    "h-11 rounded-lg pr-11 bg-card border-border focus-visible:ring-primary",
                     errors.password &&
                       "border-red-500 focus-visible:ring-red-500",
                   )}
@@ -173,7 +173,7 @@ export default function SignInPage() {
                   onClick={() => setShowPassword((prev) => !prev)}
                   aria-label={showPassword ? "Hide password" : "Show password"}
                   aria-pressed={showPassword}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-emerald-600 transition-colors"
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-primary transition-colors"
                 >
                   {showPassword ? <EyeOff size={19} /> : <Eye size={19} />}
                 </button>
@@ -217,24 +217,24 @@ export default function SignInPage() {
 
             {/* Divider */}
             <div className="flex items-center gap-4 py-1">
-              <div className="flex-1 h-px bg-slate-200" />
+              <div className="flex-1 h-px bg-border" />
 
-              <span className="text-xs font-medium text-slate-400 whitespace-nowrap">
+              <span className="text-xs font-medium text-muted-foreground whitespace-nowrap">
                 OR CONTINUE WITH
               </span>
 
-              <div className="flex-1 h-px bg-slate-200" />
+              <div className="flex-1 h-px bg-border" />
             </div>
 
             {/* Social Login */}
             <SocialLogIn />
 
             {/* Register Link */}
-            <p className="text-center text-sm text-slate-500 pt-2">
+            <p className="text-center text-sm text-muted-foreground pt-2">
               New to HopeNest?{" "}
               <Link
                 href="/signUp"
-                className="font-semibold text-emerald-600 hover:text-emerald-700 hover:underline transition-colors"
+                className="font-semibold text-primary hover:text-primary/80 hover:underline transition-colors"
               >
                 Create an account
               </Link>
@@ -243,7 +243,7 @@ export default function SignInPage() {
         </div>
 
         {/* Footer */}
-        <p className="text-center text-xs text-slate-400 mt-6">
+        <p className="text-center text-xs text-muted-foreground mt-6">
           Together, we can make a difference.
         </p>
       </div>

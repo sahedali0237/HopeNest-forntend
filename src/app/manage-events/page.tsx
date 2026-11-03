@@ -123,13 +123,13 @@ export default function ManageEventsPage() {
         <div className="max-w-7xl mx-auto">
           {/* Tabs */}
           <div className="mb-6">
-            <div className="border-b border-emerald-200 mb-3">
+            <div className="border-b border-border mb-3">
               <button
                 onClick={() => setActiveTab("upcoming")}
                 className={`tab-btn py-2 px-4 border-b-2 text-sm font-medium transition-all ${
                   activeTab === "upcoming"
-                    ? "border-emerald-600 text-emerald-600"
-                    : "border-transparent text-[#64748B] hover:text-emerald-600"
+                    ? "border-primary text-primary"
+                    : "border-transparent text-muted-foreground hover:text-primary"
                 }`}
               >
                 Upcoming <span className="text-sm font-medium">({upcomingEvents.length})</span>
@@ -138,8 +138,8 @@ export default function ManageEventsPage() {
                 onClick={() => setActiveTab("past")}
                 className={`tab-btn py-2 px-4 border-b-2 text-sm font-medium transition-all ml-6 ${
                   activeTab === "past"
-                    ? "border-emerald-600 text-emerald-600"
-                    : "border-transparent text-[#64748B] hover:text-emerald-600"
+                    ? "border-primary text-primary"
+                    : "border-transparent text-muted-foreground hover:text-primary"
                 }`}
               >
                 Past <span className="text-sm font-medium">({pastEvents.length})</span>
@@ -169,7 +169,7 @@ export default function ManageEventsPage() {
             </div>
           ) : (
             <div className="col-span-full py-8 text-center">
-              <p className="text-[#64748B] text-sm">
+              <p className="text-muted-foreground text-sm">
                 {activeTab === "upcoming" 
                   ? "No upcoming events found. Create your first event!"
                   : "No past events found."
@@ -178,7 +178,7 @@ export default function ManageEventsPage() {
               {activeTab === "upcoming" && (
                 <a
                   href="/create-events"
-                  className="mt-3 inline-block rounded-md bg-emerald-600 px-4 py-2 text-sm font-medium text-white transition hover:bg-emerald-500"
+                  className="mt-3 inline-block rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition hover:bg-primary/90"
                 >
                   Create Event
                 </a>

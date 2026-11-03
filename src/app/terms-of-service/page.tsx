@@ -127,32 +127,32 @@ export default function TermsOfServicePage() {
   const lastUpdated = "November 2, 2026";
 
   return (
-    <main className="min-h-screen bg-yellow-50 text-zinc-800 selection:bg-amber-200 selection:text-zinc-900">
+    <main className="min-h-screen bg-background text-foreground selection:bg-primary/20 selection:text-primary-foreground">
       {/* Header Banner */}
-      <div className="relative border-b border-yellow-200/80 bg-yellow-100/50 py-14 md:py-20">
+      <div className="relative border-b border-border bg-muted/50 py-14 md:py-20">
         <div className="container mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
           <Link
             href="/"
-            className="mb-8 inline-flex items-center gap-2 text-sm font-medium text-zinc-600 transition-colors hover:text-amber-700"
+            className="mb-8 inline-flex items-center gap-2 text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
           >
             <ArrowLeft className="h-4 w-4" />
             Back to HopeNest
           </Link>
 
           <div className="flex flex-col gap-4">
-            <div className="inline-flex w-fit items-center gap-2 rounded-full border border-amber-300/80 bg-amber-100/80 px-3.5 py-1.5 text-xs font-semibold tracking-wide text-amber-900 uppercase">
-              <Scale className="h-4 w-4 text-amber-700" />
+            <div className="inline-flex w-fit items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-3.5 py-1.5 text-xs font-semibold tracking-wide text-primary uppercase">
+              <Scale className="h-4 w-4 text-primary" />
               Platform Rules & Guidelines
             </div>
-            <h1 className="text-3xl font-bold tracking-tight text-zinc-900 sm:text-5xl">
+            <h1 className="text-3xl font-bold tracking-tight text-foreground sm:text-5xl">
               Terms of Service
             </h1>
-            <p className="max-w-2xl text-base text-zinc-600 sm:text-lg">
+            <p className="max-w-2xl text-base text-muted-foreground sm:text-lg">
               Please read these terms carefully before creating events, booking
               tickets, or managing your account on HopeNest.
             </p>
-            <div className="mt-2 flex items-center gap-2 text-xs font-medium text-zinc-500">
-              <Calendar className="h-3.5 w-3.5 text-amber-600" />
+            <div className="mt-2 flex items-center gap-2 text-xs font-medium text-muted-foreground">
+              <Calendar className="h-3.5 w-3.5 text-primary" />
               <span>Last updated: {lastUpdated}</span>
             </div>
           </div>
@@ -164,8 +164,8 @@ export default function TermsOfServicePage() {
         <div className="grid grid-cols-1 gap-10 lg:grid-cols-12">
           {/* Sticky Quick Navigation (Desktop) */}
           <aside className="hidden lg:col-span-4 lg:block">
-            <div className="sticky top-24 rounded-2xl border border-yellow-200/90 bg-white/90 p-6 shadow-sm backdrop-blur-sm">
-              <h2 className="mb-4 text-xs font-bold tracking-wider text-zinc-500 uppercase">
+            <div className="sticky top-24 rounded-2xl border border-border bg-card p-6 shadow-sm backdrop-blur-sm">
+              <h2 className="mb-4 text-xs font-bold tracking-wider text-muted-foreground uppercase">
                 On this page
               </h2>
               <nav className="flex flex-col space-y-2.5">
@@ -173,25 +173,25 @@ export default function TermsOfServicePage() {
                   <a
                     key={section.id}
                     href={`#${section.id}`}
-                    className="text-sm font-medium text-zinc-600 transition-colors hover:text-amber-700"
+                    className="text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
                   >
                     {section.title}
                   </a>
                 ))}
                 <a
                   href="#contact-legal"
-                  className="text-sm font-medium text-zinc-600 transition-colors hover:text-amber-700"
+                  className="text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
                 >
                   8. Contact & Support
                 </a>
               </nav>
 
-              <div className="mt-6 border-t border-yellow-200/80 pt-4">
-                <p className="text-xs text-zinc-500">
+              <div className="mt-6 border-t border-border pt-4">
+                <p className="text-xs text-muted-foreground">
                   Looking for how we handle your data?{" "}
                   <Link
                     href="/privacy-policy"
-                    className="font-semibold text-amber-700 underline underline-offset-2 hover:text-amber-800"
+                    className="font-semibold text-primary underline underline-offset-2 hover:text-primary/80"
                   >
                     Read our Privacy Policy
                   </Link>
@@ -208,13 +208,13 @@ export default function TermsOfServicePage() {
                 <section
                   key={section.id}
                   id={section.id}
-                  className="scroll-mt-24 rounded-2xl border border-yellow-200/90 bg-white p-6 shadow-sm transition-all hover:border-amber-300 hover:shadow-md sm:p-8"
+                  className="scroll-mt-24 rounded-2xl border border-border bg-card p-6 shadow-sm transition-all hover:border-primary hover:shadow-md sm:p-8"
                 >
                   <div className="mb-6 flex items-center gap-3.5">
-                    <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-amber-200 bg-yellow-100/80 text-amber-700">
+                    <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-primary/30 bg-primary/10 text-primary">
                       <IconComponent className="h-5 w-5" />
                     </div>
-                    <h2 className="text-xl font-bold text-zinc-900 sm:text-2xl">
+                    <h2 className="text-xl font-bold text-foreground sm:text-2xl">
                       {section.title}
                     </h2>
                   </div>
@@ -222,10 +222,10 @@ export default function TermsOfServicePage() {
                   <div className="space-y-5">
                     {section.content.map((item, idx) => (
                       <div key={idx} className="space-y-1.5">
-                        <h3 className="text-sm font-semibold text-zinc-900">
+                        <h3 className="text-sm font-semibold text-foreground">
                           {item.subtitle}
                         </h3>
-                        <p className="text-sm leading-relaxed text-zinc-600">
+                        <p className="text-sm leading-relaxed text-muted-foreground">
                           {item.text}
                         </p>
                       </div>
@@ -238,17 +238,17 @@ export default function TermsOfServicePage() {
             {/* Contact Card */}
             <section
               id="contact-legal"
-              className="scroll-mt-24 rounded-2xl border border-amber-300 bg-linear-to-br from-yellow-100/90 via-amber-50 to-white p-6 shadow-sm sm:p-8"
+              className="scroll-mt-24 rounded-2xl border border-primary bg-linear-to-br from-primary/10 via-primary/5 to-card p-6 shadow-sm sm:p-8"
             >
               <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
                 <div className="space-y-2">
-                  <div className="flex items-center gap-2.5 text-amber-700">
+                  <div className="flex items-center gap-2.5 text-primary">
                     <Mail className="h-5 w-5" />
-                    <h2 className="text-lg font-bold text-zinc-900">
+                    <h2 className="text-lg font-bold text-foreground">
                       8. Questions About These Terms?
                     </h2>
                   </div>
-                  <p className="max-w-xl text-sm text-zinc-600">
+                  <p className="max-w-xl text-sm text-muted-foreground">
                     If you need clarification on organizer responsibilities,
                     ticketing rules, or account policies on HopeNest, get in
                     touch with our team.
@@ -257,7 +257,7 @@ export default function TermsOfServicePage() {
 
                 <a
                   href="mailto:support@hopenest.com"
-                  className="inline-flex shrink-0 items-center justify-center rounded-xl bg-zinc-900 px-5 py-3 text-sm font-semibold text-yellow-50 shadow-sm transition-all hover:bg-zinc-800 active:scale-[0.98]"
+                  className="inline-flex shrink-0 items-center justify-center rounded-xl bg-primary px-5 py-3 text-sm font-semibold text-primary-foreground shadow-sm transition-all hover:bg-primary/90 active:scale-[0.98]"
                 >
                   Contact Support
                 </a>
