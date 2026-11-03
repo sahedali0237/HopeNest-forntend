@@ -12,6 +12,7 @@ import {
   Search,
 } from "lucide-react";
 import { API_URL, normalizeEvent, type EventData } from "./events-data";
+import { LoadingSkeleton } from "@/components/ui/loading-skeleton";
 import Image from "next/image";
 
 const EVENTS_PER_PAGE = 6;
@@ -357,23 +358,8 @@ export default function EventsClient({
           </div>
         ) : isLoading ? (
           /* Loading State */
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {Array.from({ length: 6 }).map((_, index) => (
-              <div
-                key={index}
-                className="animate-pulse overflow-hidden rounded-xl border border-border bg-card"
-              >
-                <div className="h-44 w-full bg-muted" />
-
-                <div className="space-y-3 p-4">
-                  <div className="h-4 w-2/3 rounded bg-muted" />
-                  <div className="h-3 w-1/2 rounded bg-muted" />
-                  <div className="h-3 w-2/5 rounded bg-muted" />
-
-                  <div className="mt-4 h-10 w-full rounded-md bg-muted" />
-                </div>
-              </div>
-            ))}
+          <div className="max-w-7xl mx-auto">
+            <LoadingSkeleton count={6} />
           </div>
         ) : paginatedEvents.length === 0 ? (
           /* Empty State */

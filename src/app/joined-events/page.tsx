@@ -22,6 +22,7 @@ interface Event {
 export default function JoinedEventsPage() {
   const { user, isLoading: sessionLoading } = useSession();
   const [events, setEvents] = useState<Event[]>([]);
+  const [eventsLoading, setEventsLoading] = useState(true);
   const router = useRouter();
 
   useEffect(() => {
@@ -35,6 +36,7 @@ export default function JoinedEventsPage() {
     let cancelled = false;
 
     const fetchJoinedEvents = async () => {
+      setEventsLoading(true);
       try {
         const res = await fetch("/api/events/joined", { cache: "no-store" });
         if (!res.ok) throw new Error("Failed to fetch joined events");
@@ -55,6 +57,8 @@ export default function JoinedEventsPage() {
           console.error("Error fetching joined events:", error);
           toast.error("Failed to load joined events");
         }
+      } finally {
+        if (!cancelled) setEventsLoading(false);
       }
     };
 
@@ -93,7 +97,7 @@ export default function JoinedEventsPage() {
       <DashboardLayout sidebarTitle="Joined Events">
         <main className="pt-6">
           <div className="max-w-7xl mx-auto">
-            <LoadingSkeleton />
+            <LoadingSkeleton count={6} />
           </div>
         </main>
       </DashboardLayout>
@@ -114,7 +118,9 @@ export default function JoinedEventsPage() {
             </p>
           </div>
 
-          {events.length > 0 ? (
+          {eventsLoading ? (
+            <LoadingSkeleton count={6} />
+          ) : events.length > 0 ? (
             <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
               {events.map((event) => (
                 <EventCard

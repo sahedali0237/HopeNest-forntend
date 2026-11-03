@@ -108,6 +108,18 @@ export default function ManageEventsPage() {
     return null; // Will redirect in useEffect
   }
 
+  if (isLoading) {
+    return (
+      <DashboardLayout sidebarTitle="Manage Events" user={user}>
+        <main className="pt-6">
+          <div className="max-w-7xl mx-auto">
+            <LoadingSkeleton count={6} />
+          </div>
+        </main>
+      </DashboardLayout>
+    );
+  }
+
   const upcomingEvents = events.filter(
     (e) => new Date(e.eventDate) >= new Date()
   );
