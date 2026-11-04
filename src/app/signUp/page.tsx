@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -11,6 +11,7 @@ import Link from "next/link";
 import SocialLogIn from "@/components/ui/socialLogin";
 import { authClient } from "@/lib/auth-client";
 import { toast } from "react-toastify";
+import { useSession } from "@/hooks/use-session";
 
 type SignUpFormData = {
   fullName: string;
@@ -21,11 +22,18 @@ type SignUpFormData = {
 };
 
 export default function SignUpPage() {
+  const { user: sessionUser, isLoading: sessionLoading } = useSession();
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
   const router = useRouter();
+
+  useEffect(() => {
+    if (!sessionLoading && sessionUser) {
+      router.push("/profile");
+    }
+  }, [sessionLoading, sessionUser, router]);
 
   const {
     register,

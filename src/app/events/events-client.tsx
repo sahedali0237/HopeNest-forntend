@@ -59,6 +59,15 @@ const formatDate = (date: string) => {
   });
 };
 
+/* Returns true when the event date has already passed (start of today). */
+const isPastEvent = (eventDate: string) => {
+  const parsed = new Date(eventDate);
+  if (Number.isNaN(parsed.getTime())) return false;
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  return parsed < today;
+};
+
 type Props = {
   initialEvents: EventData[];
   fetchFailed: boolean;
@@ -151,7 +160,9 @@ export default function EventsClient({
 
   /* Filter → search → sort chain */
   const visibleEvents = useMemo(() => {
-    let result = events.filter((event) => {
+    let result = events.filter((event) => !isPastEvent(event.eventDate));
+
+    result = result.filter((event) => {
       if (activeFilter === "All") return true;
       if (activeFilter === "Other") return !(event.eventType in TYPE_STYLES);
 

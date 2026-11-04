@@ -1,0 +1,11 @@
+▲ Next.js 16.4.3 (webpack)
+- Local:         http://localhost:3000
+- Network:       http://192.168.1.118:3000
+- Environments: .env
+✓ Ready in 1169ms
+✓ Running next.config.ts took 179ms
+
+○ Compiling /signUp/page ...
+ HEAD /signUp 200 in 34.5s (next.js: 32.5s, proxy.ts: 15ms, application-code: 1981ms)
+○ Compiling /signIn/page ...
+ HEAD /signIn 200 in 14.0s (next.js: 12.8s, proxy.ts: 17ms, application-code: 1151ms)

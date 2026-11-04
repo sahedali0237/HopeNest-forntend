@@ -6,7 +6,7 @@ import { normalizeEvent, type EventData } from "./events/events-data";
 import { getEventDocuments } from "./events/events-db";
 
 /** How far ahead the homepage carousel previews events */
-const PREVIEW_LIMIT = 9;
+const PREVIEW_LIMIT = 6;
 
 /* Events are read from MongoDB per request — never prerendered, so a failed
    or empty first render can't be cached into the page. */

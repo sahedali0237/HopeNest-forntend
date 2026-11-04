@@ -1,8 +1,7 @@
 import Link from "next/link";
+import { FaXTwitter, FaSquareGithub } from "react-icons/fa6";
 import {
   Users,
-  Send,
-  Code2,
   Heart,
   ArrowRight,
   Mail,
@@ -31,14 +30,14 @@ const Footer = () => {
 
   const socialLinks = [
     {
-      name: "Twitter / X",
+      name: "X",
       href: "https://x.com/yourusername",
-      icon: Send,
+      icon: FaXTwitter,
     },
     {
       name: "GitHub",
       href: "https://github.com/yourusername",
-      icon: Code2,
+      icon: FaSquareGithub,
     },
   ];
 
@@ -176,7 +175,6 @@ const Footer = () => {
             rights reserved.
           </p>
 
-          {/* Social Links */}
           <div className="flex items-center gap-3">
             {socialLinks.map((social) => {
               const Icon = social.icon;

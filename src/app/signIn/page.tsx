@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -11,6 +11,7 @@ import Link from "next/link";
 import SocialLogIn from "@/components/ui/socialLogin";
 import { toast } from "react-toastify";
 import { authClient } from "@/lib/auth-client";
+import { useSession } from "@/hooks/use-session";
 
 type SignInFormData = {
   email: string;
@@ -18,10 +19,18 @@ type SignInFormData = {
 };
 
 export default function SignInPage() {
+  const { user: sessionUser, isLoading: sessionLoading } = useSession();
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
   const router = useRouter();
+
+  // Redirect already-authenticated users to the profile page.
+  useEffect(() => {
+    if (!sessionLoading && sessionUser) {
+      router.push("/profile");
+    }
+  }, [sessionLoading, sessionUser, router]);
 
   const {
     register,

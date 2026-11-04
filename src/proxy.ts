@@ -21,13 +21,25 @@ function isProtectedPath(pathname: string): boolean {
 }
 
 export async function proxy(request: NextRequest) {
+    const { pathname } = request.nextUrl
+
+    // Normalize case for auth routes. Next.js App Router routes are
+    // case-sensitive (folders are `signUp`/`signIn`), so `/SignUp` would
+    // otherwise 404. Redirect any case variant to the canonical path.
+    const lower = pathname.toLowerCase()
+    if (lower === '/signup' && pathname !== '/signUp') {
+        return NextResponse.redirect(new URL('/signUp', request.url))
+    }
+    if (lower === '/signin' && pathname !== '/signIn') {
+        return NextResponse.redirect(new URL('/signIn', request.url))
+    }
+
     // Check both Vercel HTTPS (__Secure-) and localhost HTTP cookie names
     const sessionToken =
         request.cookies.get('__Secure-better-auth.session_token')?.value ||
         request.cookies.get('better-auth.session_token')?.value
 
     const isLoggedIn = Boolean(sessionToken)
-    const { pathname } = request.nextUrl
 
     // Proxy backend API requests: /api/backend/* -> https://hope-nest-surver.vercel.app/*
     if (pathname.startsWith('/api/backend')) {
@@ -75,6 +87,11 @@ export async function proxy(request: NextRequest) {
         loginUrl.searchParams.set('callbackUrl', pathname)
         return NextResponse.redirect(loginUrl)
     }
+    if (!isLoggedIn && isProtectedPath(pathname)) {
+        const signUpUrl = new URL('/signUp', request.url)
+        signUpUrl.searchParams.set('callbackUrl', pathname)
+        return NextResponse.redirect(signUpUrl)
+    }
 
     return NextResponse.next()
 }
@@ -87,5 +104,6 @@ export const config = {
         '/manage-events/:path*',
         '/profile/:path*',
         '/events/:path*',
+        '/:path*',
     ],
 }
